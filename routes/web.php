@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AgreementsController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DebtsController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/clients/{client}/Edit', [ClientsController::class, 'edit'])->name('clients.edit');
     Route::put('/clients/{client}', [ClientsController::class, 'update'])->name('clients.update');
     Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->name('clients.destroy');
+
+    Route::get('/debts', [DebtsController::class, 'index'])->name('debts.index');
+    Route::get('/debts/Create', [DebtsController::class, 'create'])->name('debts.create');
+    Route::post('/debts', [DebtsController::class, 'store'])->name('debts.store');
+    Route::get('/debts/{debts}/Edit', [DebtsController::class, 'edit'])->name('debts.edit');
+    Route::put('/debts/{debts}', [DebtsController::class, 'update'])->name('debts.update');
+    Route::delete('/debts/{debts}', [DebtsController::class, 'destroy'])->name('debts.destroy');
+
+    Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
+    Route::get('/payments/Create', [PaymentsController::class, 'create'])->name('payments.create');
+    Route::post('/payments', [PaymentsController::class, 'store'])->name('payments.store');
+    Route::get('/payments/{payments}/Edit', [PaymentsController::class, 'edit'])->name('payments.edit');
+    Route::put('/payments/{payments}', [PaymentsController::class, 'update'])->name('payments.update');
+    Route::delete('/payments/{payments}', [PaymentsController::class, 'destroy'])->name('payments.destroy');
+
+    Route::get('/agreements', [AgreementsController::class, 'index'])->name('agreements.index');
+    Route::get('/agreements/Create', [AgreementsController::class, 'create'])->name('agreements.create');
+    Route::post('/agreements', [AgreementsController::class, 'store'])->name('agreements.store');
+    Route::get('/agreements/{agreements}/Edit', [AgreementsController::class, 'edit'])->name('agreements.edit');
+    Route::put('/agreements/{agreements}', [AgreementsController::class, 'update'])->name('agreements.update');
+    Route::delete('/agreements/{agreements}', [AgreementsController::class, 'destroy'])->name('agreements.destroy');
 });
 
 require __DIR__ . '/auth.php';

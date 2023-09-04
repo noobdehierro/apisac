@@ -21,8 +21,7 @@
                         {{ __('Clientes') }}
                     </x-nav-link>
                 </div>
-
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('debts.index')" :active="request()->routeIs('debts.index')">
                         {{ __('Deudas') }}
                     </x-nav-link>
@@ -32,11 +31,12 @@
                         {{ __('Pagos') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('agreements.index')" :active="request()->routeIs('agreements.index')">
                         {{ __('Contratos') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
             </div>
 
 
