@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('paid_amount', 10, 2);
             $table->timestamps();
 
-            $table->foreign('debt_id')->references('id')->on('debts');
+            $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
         });
     }
 

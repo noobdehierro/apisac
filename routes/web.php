@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/clients', [ClientsController::class, 'store'])->name('clients.store');
     Route::get('/clients/{client}/Edit', [ClientsController::class, 'edit'])->name('clients.edit');
     Route::put('/clients/{client}', [ClientsController::class, 'update'])->name('clients.update');
+    Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->name('clients.destroy');
 });
 
 require __DIR__ . '/auth.php';

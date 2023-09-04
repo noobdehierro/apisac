@@ -1,8 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Editar Cliente') }}
-        </h2>
+        <div class="flex justify-between items-center">
+
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Editar Cliente') }}
+            </h2>
+            <form action="{{ route('clients.destroy', $client->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Eliminar
+                </button>
+            </form>
+
+        </div>
     </x-slot>
 
     <div class="py-12">

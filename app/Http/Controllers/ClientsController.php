@@ -46,4 +46,10 @@ class ClientsController extends Controller
         $client->update($request->all());
         return redirect()->route('clients.index')->with('success', 'Client updated successfully');
     }
+
+    public function destroy(Clients $client)
+    {
+        $client->delete();
+        return redirect()->route('clients.index')->with('success', 'Client deleted successfully');
+    }
 }
