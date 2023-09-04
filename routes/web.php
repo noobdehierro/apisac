@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +20,19 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('adminhtml.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/clients', [ClientsController::class, 'index'])->name('clients.index');
+    Route::get('/clients/Create', [ClientsController::class, 'create'])->name('clients.create');
+    Route::post('/clients', [ClientsController::class, 'store'])->name('clients.store');
+    Route::get('/clients/{client}/Edit', [ClientsController::class, 'edit'])->name('clients.edit');
+    Route::put('/clients/{client}', [ClientsController::class, 'update'])->name('clients.update');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
