@@ -35,6 +35,12 @@
                                         Banco a pagar
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Clabe interbancaria
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        monto de la deuda restante
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         proximo día de pago
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -64,7 +70,17 @@
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $debt->interbank_code }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $debt->payment_bank }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $debt->remaining_debt_amount }}
                                             </th>
 
                                             <th scope="row"

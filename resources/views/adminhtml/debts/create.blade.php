@@ -43,6 +43,13 @@
                         </div>
 
                         <div>
+                            <x-input-label for="interbank_code" :value="__('Clabe interbancaria')" />
+                            <x-text-input id="interbank_code" class="block mt-1 w-full" type="text"
+                                name="interbank_code" :value="old('interbank_code')" autofocus autocomplete="interbank_code" />
+                            <x-input-error :messages="$errors->get('interbank_code')" class="mt-2" />
+                        </div>
+
+                        <div>
                             <x-input-label for="payment_bank" :value="__('Banco a pagar')" />
                             <x-text-input id="payment_bank" class="block mt-1 w-full" type="text" name="payment_bank"
                                 :value="old('payment_bank')" autofocus autocomplete="payment_bank" />
@@ -57,6 +64,14 @@
                                 autocomplete="next_payment_date" />
                             <x-input-error :messages="$errors->get('next_payment_date')" class="mt-2" />
 
+                        </div>
+
+                        <div>
+                            <x-input-label for="remaining_debt_amount" :value="__('Monto de la deuda restante')" />
+                            <x-text-input id="remaining_debt_amount" class="block mt-1 w-full" type="text"
+                                name="remaining_debt_amount" :value="old('remaining_debt_amount')" autofocus
+                                autocomplete="remaining_debt_amount" />
+                            <x-input-error :messages="$errors->get('remaining_debt_amount')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

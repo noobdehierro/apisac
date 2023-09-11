@@ -34,6 +34,10 @@ class AgreementsController extends Controller
             'client_id' => 'required:exists:clients,id',
             'status' => 'required',
             'agreement_type' => 'required',
+            'number_installments' => 'nullable',
+            'unit_time' => 'nullable',
+            'amount_per_installment' => 'nullable',
+
         ]);
 
         Agreements::create($request->all());
@@ -56,6 +60,9 @@ class AgreementsController extends Controller
         $request->validate([
             'status' => 'required',
             'agreement_type' => 'required',
+            'number_installments' => 'nullable',
+            'unit_time' => 'nullable',
+            'amount_per_installment' => 'nullable',
         ]);
 
         $agreements->update($request->all());

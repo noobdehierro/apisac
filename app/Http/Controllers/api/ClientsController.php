@@ -44,7 +44,7 @@ class ClientsController extends Controller
         }
 
 
-        if ($client->status == 'activated') {
+        if ($client->status == 'activo') {
 
             $clienteActivo = Clients::where('id', $client->id)->first();
 

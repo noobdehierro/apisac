@@ -33,6 +33,15 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
+                                        Numero de cuotas
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Unidad de Tiempo
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Monto por cuota
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Acciones
                                     </th>
                                 </tr>
@@ -55,7 +64,18 @@
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $agreement->agreement_type }}
                                             </th>
-
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $agreement->number_installments }}
+                                            </th>
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $agreement->unit_time }}
+                                            </th>
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $agreement->amount_per_installment }}
+                                            </th>
 
 
                                             <td class="px-6 py-4">

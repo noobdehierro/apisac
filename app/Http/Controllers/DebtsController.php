@@ -33,8 +33,10 @@ class DebtsController extends Controller
             'client_id' => 'required:exists:clients,id',
             'debt_amount' => 'required',
             'payment_reference' => 'required',
+            'interbank_code' => 'required',
             'payment_bank' => 'required',
-            'next_payment_date' => 'required',
+            'next_payment_date' => 'nullable',
+            'remaining_debt_amount' => 'nullable',
         ]);
 
         Debts::create($request->all());
@@ -57,13 +59,23 @@ class DebtsController extends Controller
     public function update(Request $request, Debts $debts)
     {
 
-        $request->validate([
-            'name' => 'required',
-            'access_code' => 'required',
-        ]);
+        // dd($request->all());
+        try {
+            $request->validate([
+                'debt_amount' => 'required',
+                'payment_reference' => 'required',
+                'interbank_code' => 'required',
+                'payment_bank' => 'required',
+                'next_payment_date' => 'nullable',
+                'remaining_debt_amount' => 'nullable',
+            ]);
 
-        $debts->update($request->all());
-        return redirect()->route('debts.index')->with('success', 'Client updated successfully');
+            $debts->update($request->all());
+            return redirect()->route('debts.index')->with('success', 'Client updated successfully');
+        } catch (\Throwable $th) {
+
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     public function destroy(Debts $debts)

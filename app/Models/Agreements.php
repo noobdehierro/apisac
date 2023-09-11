@@ -13,6 +13,9 @@ class Agreements extends Model
         'client_id',
         'status',
         'agreement_type',
+        'number_installments',
+        'unit_time',
+        'amount_per_installment',
         'created_at',
     ];
 

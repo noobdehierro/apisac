@@ -39,6 +39,30 @@
                                 name="agreement_type" :value="old('agreement_type', $agreements->agreement_type)" autofocus autocomplete="agreement_type" />
                             <x-input-error :messages="$errors->get('agreement_type')" class="mt-2" />
                         </div>
+
+                        <div>
+                            <x-input-label for="number_installments" :value="__('Numero de cuotas')" />
+                            <x-text-input id="number_installments" class="block mt-1 w-full" type="text"
+                                name="number_installments" :value="old('number_installments', $agreements->number_installments)" autofocus
+                                autocomplete="number_installments" />
+                            <x-input-error :messages="$errors->get('number_installments')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="unit_time" :value="__('Unidad de tiempo')" />
+                            <x-text-input id="unit_time" class="block mt-1 w-full" type="text" name="unit_time"
+                                :value="old('unit_time', $agreements->unit_time)" autofocus autocomplete="unit_time" />
+                            <x-input-error :messages="$errors->get('unit_time')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="amount_per_installment" :value="__('Monto por cuota')" />
+                            <x-text-input id="amount_per_installment" class="block mt-1 w-full" type="text"
+                                name="amount_per_installment" :value="old('amount_per_installment', $agreements->amount_per_installment)" autofocus
+                                autocomplete="amount_per_installment" />
+                            <x-input-error :messages="$errors->get('amount_per_installment')" class="mt-2" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button>
                                 {{ __('Guardar') }}

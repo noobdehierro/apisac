@@ -13,8 +13,10 @@ class Debts extends Model
         'client_id',
         'debt_amount',
         'payment_reference',
+        'interbank_code',
         'payment_bank',
         'next_payment_date',
+        'remaining_debt_amount',
     ];
 
     public function client()

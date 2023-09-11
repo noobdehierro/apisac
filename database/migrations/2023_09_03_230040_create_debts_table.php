@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->decimal('debt_amount', 10, 2);
             $table->string('payment_reference', 50)->nullable();
+            $table->string('interbank_code', 50)->nullable();
             $table->string('payment_bank', 50)->nullable();
+            $table->decimal('remaining_debt_amount', 10, 2)->nullable()->default(0);
             $table->date('next_payment_date')->nullable();
             $table->timestamps();
 
