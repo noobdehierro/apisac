@@ -26,3 +26,5 @@ Route::post('/clarification', [ClientsController::class, 'clarification']);
 Route::post('/check-map', [ClientsController::class, 'checkmap']);
 
 Route::post('/unknowns', [ClientsController::class, 'unknowns']);
+
+Route::post('/check-agreements', [ClientsController::class, 'checkagreements']);

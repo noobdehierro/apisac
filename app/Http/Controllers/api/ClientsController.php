@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agreements;
 use App\Models\Clarification;
 use App\Models\Clients;
 use App\Models\Debts;
@@ -44,41 +45,59 @@ class ClientsController extends Controller
         }
 
 
-        if ($client->status == 'activo') {
+        // if ($client->status == 'activo') {
 
-            $clienteActivo = Clients::where('id', $client->id)->first();
+        //     $clienteActivo = Clients::where('id', $client->id)->first();
 
-            $debtActive = Debts::where('client_id', $client->id)->first();
+        //     $debtActive = Debts::where('client_id', $client->id)->first();
 
-            $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
+        //     $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Client found',
-                'data' => [
-                    'client' => $clienteActivo,
-                    'payments' => $paymentsActive,
-                    'debt' => $debtActive
-                ]
-            ], 200);
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'Client found',
+        //         'data' => [
+        //             'client' => $clienteActivo,
+        //             'payments' => $paymentsActive,
+        //             'debt' => $debtActive
+        //         ]
+        //     ], 200);
+        // }
+
+        if ($client->status != 'activo') {
+            $client->update([
+                'status' => 'ingreso'
+            ]);
         }
 
 
-        $client->update([
-            'status' => 'accessed'
-        ]);
+        $clienteActivo = Clients::where('id', $client->id)->first();
 
-        $result = DB::table('clients AS c')
-            ->select('c.id AS id', 'c.name AS name', 'c.status AS status', 'd.debt_amount AS debt_amount', 'd.payment_reference AS payment_reference', 'd.payment_bank AS payment_bank')
-            ->join('debts AS d', 'c.id', '=', 'd.client_id')
-            ->where('c.id', '=', $client->id)
-            ->first();
+        $debtActive = Debts::where('client_id', $client->id)->first();
+
+        $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Client found',
-            'data' => $result
-
+            'data' => [
+                'client' => $clienteActivo,
+                'payments' => $paymentsActive,
+                'debt' => $debtActive
+            ]
         ], 200);
+
+        // $result = DB::table('clients AS c')
+        //     ->select('c.id AS id', 'c.name AS name', 'c.status AS status', 'd.debt_amount AS debt_amount', 'd.payment_reference AS payment_reference', 'd.payment_bank AS payment_bank')
+        //     ->join('debts AS d', 'c.id', '=', 'd.client_id')
+        //     ->where('c.id', '=', $client->id)
+        //     ->first();
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Client found',
+        //     'data' => $result
+
+        // ], 200);
     }
 
     /**
@@ -356,5 +375,77 @@ class ClientsController extends Controller
             'message' => 'Client found',
             'data' => $data
         ]);
+    }
+
+    public function checkagreements(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'client_id' => 'required',
+            'number_installments' => 'required',
+            'unit_time' => 'required',
+            'amount_per_installment' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $client_id = $request->input('client_id');
+        $number_installments = $request->input('number_installments');
+        $unit_time = $request->input('unit_time');
+        $amount_per_installment = $request->input('amount_per_installment');
+
+        $client = Clients::where('id', $client_id)->first();
+
+        if (!$client) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Client not found',
+                'data' => []
+            ], 404);
+        }
+
+        $agreement = Agreements::where('client_id', $client_id)->first();
+
+        if ($agreement) {
+
+            $agreement->update([
+                'number_installments' => $number_installments,
+                'unit_time' => $unit_time,
+                'amount_per_installment' => $amount_per_installment
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Contrato actualizado',
+                'data' => $agreement
+
+            ]);
+        }
+
+
+
+        try {
+            $data = Agreements::create([
+                'client_id' => $client_id,
+                'status' => 'pendiente',
+                'agreement_type' => 'ajuste',
+                'number_installments' => $number_installments,
+                'unit_time' => $unit_time,
+                'amount_per_installment' => $amount_per_installment
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Contrato creado',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'data' => []
+            ], 500);
+        }
     }
 }
