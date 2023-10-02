@@ -14,6 +14,8 @@ use App\Models\Unknowns;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class ClientsController extends Controller
 {
@@ -44,26 +46,6 @@ class ClientsController extends Controller
             ], 404);
         }
 
-
-        // if ($client->status == 'activo') {
-
-        //     $clienteActivo = Clients::where('id', $client->id)->first();
-
-        //     $debtActive = Debts::where('client_id', $client->id)->first();
-
-        //     $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
-
-        //     return response()->json([
-        //         'status' => 'success',
-        //         'message' => 'Client found',
-        //         'data' => [
-        //             'client' => $clienteActivo,
-        //             'payments' => $paymentsActive,
-        //             'debt' => $debtActive
-        //         ]
-        //     ], 200);
-        // }
-
         if ($client->status != 'activo') {
             $client->update([
                 'status' => 'ingreso'
@@ -87,83 +69,7 @@ class ClientsController extends Controller
             ]
         ], 200);
 
-        // $result = DB::table('clients AS c')
-        //     ->select('c.id AS id', 'c.name AS name', 'c.status AS status', 'd.debt_amount AS debt_amount', 'd.payment_reference AS payment_reference', 'd.payment_bank AS payment_bank')
-        //     ->join('debts AS d', 'c.id', '=', 'd.client_id')
-        //     ->where('c.id', '=', $client->id)
-        //     ->first();
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Client found',
-        //     'data' => $result
 
-        // ], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Clients  $clients
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-        return $request;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Clients  $clients
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Clients $clients)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Clients  $clients
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Clients $clients)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Clients  $clients
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Clients $clients)
-    {
-        //
     }
 
     public function help(Request $request)
@@ -448,4 +354,76 @@ class ClientsController extends Controller
             ], 500);
         }
     }
+
+    public function pdf(  $client)
+    {
+
+        $client = Clients::where('access_code', $client)->first();
+
+        if (!$client) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Client not found',
+                'data' => []
+            ], 404);
+        }
+
+        $fecha = Carbon::now();
+
+        $dia = $fecha->format('d');
+        $mes = $fecha->format('m');
+        $ano = $fecha->format('Y');
+        $name = $client->name;
+
+        $deuda = Debts::where('client_id', $client->id)->first();
+
+        $pdf = Pdf::loadView('pdf.pdf', [
+            'dia' => $dia,
+            'mes' => $mes,
+            'ano' => $ano,
+            'name' => $name,
+            'deuda' => $deuda->debt_amount
+
+        ]);
+
+        // return $pdf->stream();
+        return $pdf->download('contract.pdf');
+    }
+
+    public function pdfplazos(  $client )
+    {
+
+        $client = Clients::where('access_code', $client)->first();
+
+        if (!$client) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Client not found',
+                'data' => []
+            ], 404);
+        }
+
+        $fecha = Carbon::now();
+
+        $dia = $fecha->format('d');
+        $mes = $fecha->format('m');
+        $ano = $fecha->format('Y');
+        $name = $client->name;
+
+        $deuda = Debts::where('client_id', $client->id)->first();
+
+        $pdf = Pdf::loadView('pdf.pdfplazos', [
+            'dia' => $dia,
+            'mes' => $mes,
+            'ano' => $ano,
+            'name' => $name,
+            'deuda' => $deuda->debt_amount
+
+        ]);
+
+        // return $pdf->stream();
+        return $pdf->download('contract.pdf');
+    }
+
+
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\api\ClientsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +29,15 @@ Route::post('/check-map', [ClientsController::class, 'checkmap']);
 Route::post('/unknowns', [ClientsController::class, 'unknowns']);
 
 Route::post('/check-agreements', [ClientsController::class, 'checkagreements']);
+
+Route::get('/pdf/{access_code}', [ClientsController::class, 'pdf']);
+Route::get('/pdfplazos/{access_code}', [ClientsController::class, 'pdfplazos']);
+
+
+// Route::get('/pdf', function () {
+//     $pdf = Pdf::loadView('pdf.pdf', [
+//         'name' => 'John Doe',
+//         'age' => 50,
+//     ]);
+//     return $pdf->stream();
+// })->name('pdf');
