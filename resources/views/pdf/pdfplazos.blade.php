@@ -66,7 +66,7 @@
         </div>
         <div>
             <div class="fecha">
-                <p>Ciudad de méxico {{$dia}} de {{$mes}} de {{$ano}}</p>
+                <p>Ciudad de méxico {{ $dia }} de {{ $mes }} de {{ $ano }}</p>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
                 OFRECIMIENTO DE
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
                 EMITIDO POR ************** INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA OTRA
-                PARTE EL C. {{$name}} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span> CON
+                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span> CON
                 DOMICILIO EN “Calle. **********
                 ********,COLONIA ********,CIUDAD ***************, Ciudad *******, C.P. ******”. AL TENOR DE LAS
                 SIGUIENTES CLÁUSULAS:
@@ -90,7 +90,8 @@
             <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> IBKAN CAPITAL, S.A.P.I. DE
                 C.V., (“IBKAN”), <span class="red">POR</span> LA
                 CANTIDAD DE
-                ${{$deuda}} (******* ********* ********* ******* PESOS **/100 M.N.) CANTIDAD DERIVADA DEL CRÉDITO NO.
+                ${{ $deuda }} (******* ********* ********* ******* PESOS **/100 M.N.) CANTIDAD DERIVADA DEL
+                CRÉDITO NO.
                 ************** EMITIDO POR ********* ******* S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
             </P>
 
@@ -111,13 +112,21 @@
                     <th style="background-color: #4f81bd; color: white; font-size: 12px">FECHA DE PAGO</th>
                     <th style="background-color: #4f81bd; color: white; font-size: 12px">CONCEPTO DE PAGO</th>
                 </tr>
-                <tr>
-                    <td style="background-color: #4f81bd; color: white; font-size: 12px">1</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">$10,000.00(DIEZ MIL PESOS
-                        00/100 M.N.)</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">02/11/2021</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">A CAPITAL</td>
-                </tr>
+
+                @foreach ($payments as $payment)
+                    <tr>
+                        <td style="background-color: #4f81bd; color: white; font-size: 12px">
+                            {{ $payment->quota_number }}</td>
+                        <td style="background-color: #d0d8e7; color: black; font-size: 12px">{{ $payment->paid_amount }}
+                        </td>
+                        <td style="background-color: #d0d8e7; color: black; font-size: 12px">
+                            {{ $payment->payment_date }}
+                        </td>
+                        <td style="background-color: #d0d8e7; color: black; font-size: 12px">
+                            A CAPITAL</td>
+
+                    </tr>
+                @endforeach
             </table>
         </div>
 

@@ -36,6 +36,11 @@ Route::get('/pdfplazos/{access_code}', [ClientsController::class, 'pdfplazos']);
 Route::post('/addagreements/{client}', [ClientsController::class, 'addagreements']);
 
 
+Route::post('/addagreementscuotas', [ClientsController::class, 'addagreementsCuotas']);
+
+
+
+
 // Route::get('/pdf', function () {
 //     $pdf = Pdf::loadView('pdf.pdf', [
 //         'name' => 'John Doe',

@@ -30,11 +30,10 @@
 
 
                         <div>
-                            <select name="status"  class="block mt-1 w-full">
-                                <option value="" >Seleccione un estado</option>
+                            <select name="status" class="block mt-1 w-full">
+                                <option value="">Seleccione un estado</option>
                                 <option value="inactivo">Inactivo</option>
                                 <option value="activo">Activo</option>
-                                <option value="pendiente">Pendiente</option>
                                 <option value="pagando">Pagando</option>
 
                             </select>

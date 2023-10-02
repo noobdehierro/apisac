@@ -333,7 +333,7 @@ class ClientsController extends Controller
             $data = Agreements::create([
                 'client_id' => $client_id,
                 'status' => 'pendiente',
-                'agreement_type' => 'ajuste',
+                'agreement_type' => 'contado',
                 'number_installments' => $number_installments,
                 'unit_time' => $unit_time,
                 'amount_per_installment' => $amount_per_installment
@@ -381,12 +381,18 @@ class ClientsController extends Controller
 
         $deuda = Debts::where('client_id', $client->id)->first();
 
+        $porsentaje = 80;
+
+        $descuento = ($deuda->debt_amount / 100) * $porsentaje;
+
+        $deudaConDescuento = $deuda->debt_amount - $descuento;
+
         $pdf = Pdf::loadView('pdf.pdf', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deuda->debt_amount
+            'deuda' => $deudaConDescuento
 
         ]);
 
@@ -461,16 +467,97 @@ class ClientsController extends Controller
 
         $deuda = Debts::where('client_id', $client->id)->first();
 
+        $payments = Payments::where('debt_id', $deuda->id)->get();
+
+
         $pdf = Pdf::loadView('pdf.pdfplazos', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deuda->debt_amount
+            'deuda' => $deuda->debt_amount,
+            'payments' => $payments
 
         ]);
 
         // return $pdf->stream();
-        return $pdf->download('contract.pdf');
+        return $pdf->download('contract_' . $client->name . '_' . $fecha->format('Y-m-d') . '.pdf');
+    }
+
+    public function addagreementsCuotas(Request $request)
+    {
+
+        $client = Clients::where('access_code', $request->input('access_code'))->first();
+
+        $client->update([
+            'status' => 'pagando'
+        ]);
+
+        if (!$client) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Client not found',
+                'data' => $request->all()
+            ], 404);
+        }
+
+        $plazos = $request->input('plazoFinal');
+        $unit_time = $request->input('tipoFinal');
+        $pago = $request->input('pagoFinal');
+
+
+        Agreements::create([
+            "client_id" => $client->id,
+            "status" => "activo",
+            "agreement_type" => "plazos",
+            "number_installments" => $plazos,
+            "unit_time" => $unit_time,
+            "amount_per_installment" => $pago,
+
+        ]);
+
+        $clientDebt = Debts::where('client_id', $client->id)->first();
+        $clientDebt->update([
+            "remaining_debt_amount" => $clientDebt->debt_amount,
+            "next_payment_date" => Carbon::now()->addDays(1),
+        ]);
+        $clientDebt->save();
+
+        try {
+            $fecha = null;
+
+            for ($i = 0; $i < $plazos; $i++) {
+                $numeroInicial = $i + 1;
+
+                if ($unit_time == 'semanal') { // Sin comillas dobles
+                    $fecha = Carbon::now()->addDays($numeroInicial * 7);
+                } elseif ($unit_time == 'quincenal') { // Sin comillas dobles
+                    $fecha = Carbon::now()->addDays($numeroInicial * 15);
+                } elseif ($unit_time == 'mensual') { // Sin comillas dobles
+                    $fecha = Carbon::now()->addMonths($numeroInicial);
+                }
+                Payments::create([
+                    "debt_id" => $clientDebt->id,
+                    "client_id" => $client->id,
+                    "quota_number" => $i + 1,
+                    "payment_date" => $fecha,
+                    "paid_amount" => $pago,
+                    "status" => "pendiente",
+                ]);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Contrato creado',
+            ]);
+        } catch (\Throwable $th) {
+
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'data' => $request->all()
+            ], 400);
+        }
     }
 }
