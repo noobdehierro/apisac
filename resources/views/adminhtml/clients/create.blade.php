@@ -27,11 +27,19 @@
                             <x-input-error :messages="$errors->get('access_code')" class="mt-2" />
                         </div>
 
+
+
                         <div>
-                            <x-input-label for="status" :value="__('Status')" />
-                            <x-text-input id="status" class="block mt-1 w-full" type="text" name="status"
-                                :value="old('status')" autofocus autocomplete="status" />
+                            <select name="status"  class="block mt-1 w-full">
+                                <option value="" >Seleccione un estado</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="activo">Activo</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="pagando">Pagando</option>
+
+                            </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
+
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

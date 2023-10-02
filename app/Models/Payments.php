@@ -11,8 +11,10 @@ class Payments extends Model
 
     protected $fillable = [
         'debt_id',
+        'quota_number',
         'payment_date',
         'paid_amount',
+        'status',
         'created_at',
     ];
 

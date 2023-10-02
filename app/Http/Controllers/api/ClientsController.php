@@ -46,9 +46,9 @@ class ClientsController extends Controller
             ], 404);
         }
 
-        if ($client->status != 'activo') {
+        if ($client->status != 'pagando') {
             $client->update([
-                'status' => 'ingreso'
+                'status' => 'activo'
             ]);
         }
 
@@ -68,8 +68,6 @@ class ClientsController extends Controller
                 'debt' => $debtActive
             ]
         ], 200);
-
-
     }
 
     public function help(Request $request)
@@ -355,10 +353,16 @@ class ClientsController extends Controller
         }
     }
 
-    public function pdf(  $client)
+    public function pdf($client)
     {
 
         $client = Clients::where('access_code', $client)->first();
+
+        $client->update([
+            'status' => 'pagando'
+        ]);
+
+        $client->save();
 
         if (!$client) {
             return response()->json([
@@ -387,10 +391,55 @@ class ClientsController extends Controller
         ]);
 
         // return $pdf->stream();
-        return $pdf->download('contract.pdf');
+        return $pdf->download('contract_' . $client->name . '_' . $fecha->format('Y-m-d') . '.pdf');
     }
 
-    public function pdfplazos(  $client )
+    public function addagreements(Clients $client, Request $request)
+    {
+
+
+
+        $clientId = $client->id;
+        $amount_per_installment = $request->input('amount_per_installment');
+
+        Agreements::create([
+            "client_id" => $clientId,
+            "status" => "activo",
+            "agreement_type" => "contado",
+            "number_installments" => 1,
+            "unit_time" => "contado",
+            "amount_per_installment" => $amount_per_installment,
+
+        ]);
+
+        $clientDebt = Debts::where('client_id', $clientId)->first();
+        $clientDebt->update([
+            "remaining_debt_amount" => $amount_per_installment,
+            "next_payment_date" => Carbon::now()->addDays(1),
+        ]);
+        $clientDebt->save();
+
+        Payments::create([
+            "debt_id" => $clientDebt->id,
+            "client_id" => $clientId,
+            "quota_number" => 1,
+            "payment_date" => Carbon::now()->addDays(1),
+            "paid_amount" => $amount_per_installment,
+            "status" => "pendiente",
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Contrato creado',
+
+        ]);
+    }
+
+
+
+
+
+    public function pdfplazos($client)
     {
 
         $client = Clients::where('access_code', $client)->first();
@@ -424,6 +473,4 @@ class ClientsController extends Controller
         // return $pdf->stream();
         return $pdf->download('contract.pdf');
     }
-
-
 }

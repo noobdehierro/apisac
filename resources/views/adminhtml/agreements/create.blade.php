@@ -25,15 +25,21 @@
                         </div>
                         <div>
                             <x-input-label for="status" :value="__('Estado')" />
-                            <x-text-input id="status" class="block mt-1 w-full" type="text" name="status"
-                                :value="old('status')" autofocus autocomplete="status" />
+                            <select name="status" class="block mt-1 w-full" id="status">
+                                <option value="">Seleccione un estado</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="activo">Activo</option>
+                            </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
 
                         <div>
                             <x-input-label for="agreement_type" :value="__('Tipo de acuerdo')" />
-                            <x-text-input id="agreement_type" class="block mt-1 w-full" type="text"
-                                name="agreement_type" :value="old('agreement_type')" autofocus autocomplete="agreement_type" />
+                            <select name="agreement_type" class="block mt-1 w-full" id="agreement_type">
+                                <option value="">Seleccione un tipo de acuerdo</option>
+                                <option value="contado">Contado</option>
+                                <option value="credito">Credito</option>
+                            </select>
                             <x-input-error :messages="$errors->get('agreement_type')" class="mt-2" />
                         </div>
                         <div>
@@ -46,8 +52,13 @@
 
                         <div>
                             <x-input-label for="unit_time" :value="__('Unidad de tiempo')" />
-                            <x-text-input id="unit_time" class="block mt-1 w-full" type="text" name="unit_time"
-                                :value="old('unit_time')" autofocus autocomplete="unit_time" />
+                            <select name="unit_time" class="block mt-1 w-full" id="unit_time">
+                                <option value="">Seleccione una unidad de tiempo</option>
+                                <option value="contado">Contado</option>
+                                <option value="semanal">Semanal</option>
+                                <option value="quincenal">Quincenal</option>
+                                <option value="mensual">Mensual</option>
+                            </select>
                             <x-input-error :messages="$errors->get('unit_time')" class="mt-2" />
                         </div>
 

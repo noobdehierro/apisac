@@ -30,7 +30,12 @@
                             <select name="debt_id" id="debt_id" class="block mt-1 w-full">
                                 <option value="">Seleccione el cliente deudor</option>
                                 @foreach ($dataDebts as $dataDebt)
-                                    <option value="{{ $dataDebt->debt_id }}">{{ $dataDebt->client_name }}</option>
+                                    @if ($dataDebt->debt_id == $payments->debt_id)
+                                        <option value="{{ $dataDebt->debt_id }}" selected>{{ $dataDebt->client_name }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $dataDebt->debt_id }}">{{ $dataDebt->client_name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('debt_id')" class="mt-2" />
@@ -38,8 +43,9 @@
 
                         <div>
                             <x-input-label for="payment_date" :value="__('Fecha de pago')" />
-                            <input type="date" name="payment_date" id="payment_date" class="block mt-1 w-full"
-                                :value="old('payment_date')" autofocus autocomplete="payment_date" />
+                            <input type="date" id="payment_date" name="payment_date" class="block mt-1 w-full"
+                                class="form-control" value="{{ old('payment_date', $payments->payment_date ?? '') }}">
+
                             <x-input-error :messages="$errors->get('payment_date')" class="mt-2" />
                         </div>
 
@@ -48,6 +54,18 @@
                             <x-text-input id="paid_amount" class="block mt-1 w-full" type="text" name="paid_amount"
                                 :value="old('paid_amount', $payments->paid_amount)" autofocus autocomplete="paid_amount" />
                             <x-input-error :messages="$errors->get('paid_amount')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="status" :value="__('Estado')" />
+                            <select name="status" class="block mt-1 w-full" id="status">
+                                <option value="">Seleccione un estado</option>
+                                <option value="pagado" @if ($payments->status == 'pagado') selected @endif>Pagado</option>
+
+                                <option value="pendiente" @if ($payments->status == 'pendiente') selected @endif>Pendiente
+                                </option>
+                            </select>
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

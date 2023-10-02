@@ -24,6 +24,8 @@ class ClientsController extends Controller
         $request->validate([
             'name' => 'required',
             'access_code' => 'required',
+            'status' => 'required',
+
         ]);
 
         Clients::create($request->all());
@@ -41,6 +43,7 @@ class ClientsController extends Controller
         $request->validate([
             'name' => 'required',
             'access_code' => 'required',
+            'status' => 'required',
         ]);
 
         $client->update($request->all());

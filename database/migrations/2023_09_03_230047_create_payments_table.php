@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('debt_id');
+            $table->integer('quota_number')->nullable();
             $table->date('payment_date');
             $table->decimal('paid_amount', 10, 2);
+            $table->string('status', 50)->nullable();
             $table->timestamps();
 
             $table->foreign('debt_id')->references('id')->on('debts')->onDelete('cascade');
