@@ -203,7 +203,7 @@ class ClientsController extends Controller
             'cel' => 'required',
             'telephone' => 'required',
             'email' => 'required|email',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'clarification' => 'required',
 
         ]);
 
@@ -215,9 +215,7 @@ class ClientsController extends Controller
         $cel = $request->input('cel');
         $telephone = $request->input('telephone');
         $email = $request->input('email');
-        $path = $request->file('image')->store('public/images');
-        $validator['image'] = $path;
-
+        $clarification = $request->input('clarification');
 
 
         $client = Clients::where('id', $client_id)->first();
@@ -235,7 +233,7 @@ class ClientsController extends Controller
             'cel' => $cel,
             'telephone' => $telephone,
             'email' => $email,
-            'image' => $validator['image']
+            'clarification' => $clarification
         ]);
 
         return response()->json([
@@ -403,42 +401,58 @@ class ClientsController extends Controller
     public function addagreements(Clients $client, Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'amount_per_installment' => 'required',
+            'date_pay' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
 
         $clientId = $client->id;
         $amount_per_installment = $request->input('amount_per_installment');
+        $date_pay = $request->input('date_pay');
 
-        Agreements::create([
-            "client_id" => $clientId,
-            "status" => "activo",
-            "agreement_type" => "contado",
-            "number_installments" => 1,
-            "unit_time" => "contado",
-            "amount_per_installment" => $amount_per_installment,
+        try {
+            Agreements::create([
+                "client_id" => $clientId,
+                "status" => "activo",
+                "agreement_type" => "contado",
+                "number_installments" => 1,
+                "unit_time" => "contado",
+                "amount_per_installment" => $amount_per_installment,
 
-        ]);
+            ]);
 
-        $clientDebt = Debts::where('client_id', $clientId)->first();
-        $clientDebt->update([
-            "remaining_debt_amount" => $amount_per_installment,
-            "next_payment_date" => Carbon::now()->addDays(1),
-        ]);
-        $clientDebt->save();
+            $clientDebt = Debts::where('client_id', $clientId)->first();
+            $clientDebt->update([
+                "remaining_debt_amount" => $amount_per_installment,
+                "next_payment_date" => $date_pay
+            ]);
+            $clientDebt->save();
 
-        Payments::create([
-            "debt_id" => $clientDebt->id,
-            "client_id" => $clientId,
-            "quota_number" => 1,
-            "payment_date" => Carbon::now()->addDays(1),
-            "paid_amount" => $amount_per_installment,
-            "status" => "pendiente",
-        ]);
+            Payments::create([
+                "debt_id" => $clientDebt->id,
+                "client_id" => $clientId,
+                "quota_number" => 1,
+                "payment_date" => $date_pay,
+                "paid_amount" => $amount_per_installment,
+                "status" => "pendiente",
+            ]);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Contrato creado',
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Contrato creado',
 
-        ]);
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'data' => []
+            ], 500);
+        }
     }
 
 

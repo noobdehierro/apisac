@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('cel');
             $table->string('telephone');
             $table->string('email');
-            $table->string('image');
+            $table->string('clarification');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
