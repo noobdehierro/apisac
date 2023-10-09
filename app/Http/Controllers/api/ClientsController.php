@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Agreements;
-use App\Models\Clarification;
-use App\Models\Clients;
-use App\Models\Debts;
+use Carbon\Carbon;
 use App\Models\Help;
 use App\Models\Maps;
+use App\Models\Debts;
+use App\Models\Clients;
 use App\Models\Payments;
 use App\Models\Unknowns;
+use App\Models\Agreements;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Clarification;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
 {
@@ -472,5 +472,104 @@ class ClientsController extends Controller
 
         // return $pdf->stream();
         return $pdf->download('contract.pdf');
+    }
+
+    public function setagreements(Request $request)
+    {
+        $cantidadPago = $request->input('cantidadPago');
+        $tipoCuonta = $request->input('tipoCuonta');
+
+        $oneToThree = 11360.52;
+        $fourToSix = 12622.80;
+        $sevenToTwelve = 14516.22;
+        $thirteenToEighteen = 15778.50;
+        $nineteenToTwentyFour = 17671.92;
+
+
+        $fases = [
+            "primera fase" => [
+                "meses" => $oneToThree,
+                "rango" => [1, 3],
+            ],
+            "segunda fase" => [
+                "meses" => $fourToSix,
+                "rango" => [4, 6],
+            ],
+            "tercera fase" => [
+                "meses" => $sevenToTwelve,
+                "rango" => [7, 12],
+            ],
+            "cuarta fase" => [
+                "meses" => $thirteenToEighteen,
+                "rango" => [13, 18],
+            ],
+            "quinta fase" => [
+                "meses" => $nineteenToTwentyFour,
+                "rango" => [19, 24],
+            ]
+        ];
+
+        $rangos = array();
+
+
+        foreach ($fases as $fase => $faseData) {
+            $rangos[$fase] = array();
+
+            for ($i = $faseData["rango"][0]; $i <= $faseData["rango"][1]; $i++) {
+                $numeroSemanas = $i * 4;
+
+                if ($tipoCuonta == "semanal") {
+                    $valorSemanal = $faseData["meses"] / $numeroSemanas;
+                    array_push($rangos[$fase], $valorSemanal);
+                } else if ($tipoCuonta == "quincenal") {
+                    $valorQuincenal = $faseData["meses"] / ($numeroSemanas / 2);
+                    array_push($rangos[$fase], $valorQuincenal);
+                } else if ($tipoCuonta == "mensual") {
+                    $valorMensual = $faseData["meses"] / ($i);
+                    array_push($rangos[$fase], $valorMensual);
+                }
+            }
+        }
+
+        // return $rangos;
+
+        // echo json_encode($rangos);
+
+
+        $valor_a_buscar = $cantidadPago;
+        $valor_mas_cercano = null;
+        $ultimo_valor = null;
+        $repeticiones = 0;
+
+        // Recorre la matriz multidimensional
+        foreach ($rangos as $fase => $valores) {
+
+            foreach ($valores as $clave => $valor) {
+                $repeticiones++;
+                // Comprueba si el valor actual es menor o igual a $valor_a_buscar
+                if ($valor <= $valor_a_buscar) {
+                    // Si es así, actualiza $valor_mas_cercano y rompe el bucle
+                    $valor_mas_cercano = $valor;
+                    break 2; // Rompe dos niveles de bucles (el bucle externo y el bucle interno)
+                }
+                // Si no se encuentra un valor menor o igual, actualiza $ultimo_valor
+                $ultimo_valor = $valor;
+            }
+        }
+
+        $numeroCuotas = $tipoCuonta == "mensual" ? $repeticiones : ($tipoCuonta == "quincenal" ? $repeticiones * 2 : $repeticiones * 4);
+
+        $valor_a_pagar = $valor_mas_cercano ? $valor_mas_cercano * $numeroCuotas : $ultimo_valor * $numeroCuotas;
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Contrato actualizado',
+            'data' => [
+                'valor_a_pagar' => $valor_a_pagar,
+                'numeroCuotas' => $numeroCuotas,
+                'valor_mas_cercano' => $valor_mas_cercano ?? $ultimo_valor,
+                'ultimo_valor' => $ultimo_valor
+            ]
+        ]);
     }
 }

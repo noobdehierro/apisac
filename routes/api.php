@@ -35,6 +35,8 @@ Route::get('/pdfplazos/{access_code}', [ClientsController::class, 'pdfplazos']);
 
 Route::post('/addagreements/{client}', [ClientsController::class, 'addagreements']);
 
+Route::post('/set_agreements', [ClientsController::class, 'setagreements']);
+
 
 // Route::get('/pdf', function () {
 //     $pdf = Pdf::loadView('pdf.pdf', [
