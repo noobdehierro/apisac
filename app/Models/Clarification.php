@@ -14,7 +14,7 @@ class Clarification extends Model
         'cel',
         'telephone',
         'email',
-        'image'
+        'clarification'
     ];
 
     public function client()
