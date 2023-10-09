@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgreementsController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DebtorController;
 use App\Http\Controllers\DebtsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
@@ -58,6 +59,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/agreements/{agreements}/Edit', [AgreementsController::class, 'edit'])->name('agreements.edit');
     Route::put('/agreements/{agreements}', [AgreementsController::class, 'update'])->name('agreements.update');
     Route::delete('/agreements/{agreements}', [AgreementsController::class, 'destroy'])->name('agreements.destroy');
+
+    Route::get('/debtors', [DebtorController::class, 'index'])->name('debtors.index');
+    Route::get('/debtors/create', [DebtorController::class, 'create'])->name('debtors.create');
+    Route::post('/debtors', [DebtorController::class, 'store'])->name('debtors.store');
+    Route::get('/debtors/{debtor}', [DebtorController::class, 'show'])->name('debtors.show');
+    Route::get('/debtors/{debtor}/edit', [DebtorController::class, 'edit'])->name('debtors.edit');
+    Route::put('/debtors/{debtor}', [DebtorController::class, 'update'])->name('debtors.update');
+    Route::delete('/debtors/{debtor}', [DebtorController::class, 'destroy'])->name('debtors.destroy');
 });
 
 require __DIR__ . '/auth.php';
