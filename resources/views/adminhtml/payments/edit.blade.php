@@ -25,7 +25,7 @@
                         @csrf
                         @method('PUT')
 
-                        <div>
+                        {{-- <div>
                             <x-input-label for="debt_id" :value="__('Deuda')" />
                             <select name="debt_id" id="debt_id" class="block mt-1 w-full">
                                 <option value="">Seleccione el cliente deudor</option>
@@ -39,7 +39,7 @@
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('debt_id')" class="mt-2" />
-                        </div>
+                        </div> --}}
 
                         <div>
                             <x-input-label for="payment_date" :value="__('Fecha de pago')" />

@@ -14,21 +14,21 @@
                         @csrf
 
                         <div>
-                            <x-input-label for="client_id" :value="__('Cliente')" />
-                            <select name="client_id" id="client_id" class="block mt-1 w-full">
-                                <option value="">Seleccione un cliente</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
+                            <x-input-label for="debtor_id" :value="__('Cliente deudor')" />
+                            <select name="debtor_id" id="debtor_id" class="block mt-1 w-full">
+                                <option value="">Seleccione un cliente deudor</option>
+                                @foreach ($debtors as $debtor)
+                                    <option value="{{ $debtor->id }}">{{ $debtor->full_name }}</option>
                                 @endforeach
                             </select>
-                            <x-input-error :messages="$errors->get('client_id')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('debtor_id')" class="mt-2" />
                         </div>
                         <div>
                             <x-input-label for="status" :value="__('Estado')" />
                             <select name="status" class="block mt-1 w-full" id="status">
                                 <option value="">Seleccione un estado</option>
-                                <option value="inactivo">Inactivo</option>
-                                <option value="activo">Activo</option>
+                                <option value="pagado">Pagado</option>
+                                <option value="pendiente">Pendiente</option>
                             </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>

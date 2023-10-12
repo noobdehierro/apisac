@@ -42,11 +42,12 @@
                         </div>
 
                         <div>
+                            <x-input-label for="status" :value="__('Estado')" />
                             <select name="status" class="block mt-1 w-full">
                                 <option value="">Seleccione un estado</option>
                                 <option value="inactivo">Inactivo</option>
                                 <option value="activo">Activo</option>
-                                <option value="pendiente">Pendiente</option>
+                                {{-- <option value="pendiente">Pendiente</option> --}}
                                 <option value="pagando">Pagando</option>
 
                             </select>
@@ -78,7 +79,7 @@
                         </div>
 
                         <div>
-                            <x-input-label for="minimum_to_collect" :value="__('Monto minimo')" />
+                            <x-input-label for="minimum_to_collect" :value="__('Monto minimo a cobrar')" />
                             <x-text-input id="minimum_to_collect" class="block mt-1 w-full" type="text"
                                 name="minimum_to_collect" :value="old('minimum_to_collect')" />
                             <x-input-error :messages="$errors->get('minimum_to_collect')" class="mt-2" />
@@ -99,73 +100,73 @@
                         </div>
 
                         <div>
-                            <x-input-label for="1_3_months" :value="__('Monto 1-3 meses')" />
-                            <x-text-input id="1_3_months" class="block mt-1 w-full" type="text" name="1_3_months"
-                                :value="old('1_3_months')" />
-                            <x-input-error :messages="$errors->get('1_3_months')" class="mt-2" />
+                            <x-input-label for="one_three_months" :value="__('Monto 1-3 meses')" />
+                            <x-text-input id="one_three_months" class="block mt-1 w-full" type="text"
+                                name="one_three_months" :value="old('one_three_months')" />
+                            <x-input-error :messages="$errors->get('one_three_months')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="nameIn1_3" :value="__('Nombre 1-3 meses')" />
-                            <x-text-input id="nameIn1_3" class="block mt-1 w-full" type="text" name="nameIn1_3"
-                                :value="old('nameIn1_3')" />
-                            <x-input-error :messages="$errors->get('nameIn1_3')" class="mt-2" />
+                            <x-input-label for="nameInOne_threeMonths" :value="__('Nombre 1-3 meses')" />
+                            <x-text-input id="nameInOne_threeMonths" class="block mt-1 w-full" type="text"
+                                name="nameInOne_threeMonths" :value="old('nameInOne_threeMonths')" />
+                            <x-input-error :messages="$errors->get('nameInOne_threeMonths')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="4_6_months" :value="__('Monto 4-6 meses')" />
-                            <x-text-input id="4_6_months" class="block mt-1 w-full" type="text" name="4_6_months"
-                                :value="old('4_6_months')" />
-                            <x-input-error :messages="$errors->get('4_6_months')" class="mt-2" />
+                            <x-input-label for="four_six_months" :value="__('Monto 4-6 meses')" />
+                            <x-text-input id="four_six_months" class="block mt-1 w-full" type="text"
+                                name="four_six_months" :value="old('four_six_months')" />
+                            <x-input-error :messages="$errors->get('four_six_months')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="nameIn4_6" :value="__('Nombre 4-6 meses')" />
-                            <x-text-input id="nameIn4_6" class="block mt-1 w-full" type="text" name="nameIn4_6"
-                                :value="old('nameIn4_6')" />
-                            <x-input-error :messages="$errors->get('nameIn4_6')" class="mt-2" />
+                            <x-input-label for="nameInFour_sixMonths" :value="__('Nombre 4-6 meses')" />
+                            <x-text-input id="nameInFour_sixMonths" class="block mt-1 w-full" type="text"
+                                name="nameInFour_sixMonths" :value="old('nameInFour_sixMonths')" />
+                            <x-input-error :messages="$errors->get('nameInFour_sixMonths')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="7_12_months" :value="__('Monto 7-12 meses')" />
-                            <x-text-input id="7_12_months" class="block mt-1 w-full" type="text"
-                                name="7_12_months" :value="old('7_12_months')" />
-                            <x-input-error :messages="$errors->get('7_12_months')" class="mt-2" />
+                            <x-input-label for="seven_twelve_months" :value="__('Monto 7-12 meses')" />
+                            <x-text-input id="seven_twelve_months" class="block mt-1 w-full" type="text"
+                                name="seven_twelve_months" :value="old('seven_twelve_months')" />
+                            <x-input-error :messages="$errors->get('seven_twelve_months')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="nameIn7_12" :value="__('Nombre 7-12 meses')" />
-                            <x-text-input id="nameIn7_12" class="block mt-1 w-full" type="text" name="nameIn7_12"
-                                :value="old('nameIn7_12')" />
-                            <x-input-error :messages="$errors->get('nameIn7_12')" class="mt-2" />
+                            <x-input-label for="nameInSeven_twelveMonths" :value="__('Nombre 7-12 meses')" />
+                            <x-text-input id="nameInSeven_twelveMonths" class="block mt-1 w-full" type="text"
+                                name="nameInSeven_twelveMonths" :value="old('nameInSeven_twelveMonths')" />
+                            <x-input-error :messages="$errors->get('nameInSeven_twelveMonths')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="13_18_months" :value="__('Monto 13-18 meses')" />
-                            <x-text-input id="13_18_months" class="block mt-1 w-full" type="text"
-                                name="13_18_months" :value="old('13_18_months')" />
-                            <x-input-error :messages="$errors->get('13_18_months')" class="mt-2" />
+                            <x-input-label for="thirteen_eighteen_months" :value="__('Monto 13-18 meses')" />
+                            <x-text-input id="thirteen_eighteen_months" class="block mt-1 w-full" type="text"
+                                name="thirteen_eighteen_months" :value="old('thirteen_eighteen_months')" />
+                            <x-input-error :messages="$errors->get('thirteen_eighteen_months')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="nameIn13_18" :value="__('Nombre 13-18 meses')" />
-                            <x-text-input id="nameIn13_18" class="block mt-1 w-full" type="text"
-                                name="nameIn13_18" :value="old('nameIn13_18')" />
-                            <x-input-error :messages="$errors->get('nameIn13_18')" class="mt-2" />
+                            <x-input-label for="nameInThirteen_eighteenMonths" :value="__('Nombre 13-18 meses')" />
+                            <x-text-input id="nameInThirteen_eighteenMonths" class="block mt-1 w-full" type="text"
+                                name="nameInThirteen_eighteenMonths" :value="old('nameInThirteen_eighteenMonths')" />
+                            <x-input-error :messages="$errors->get('nameInThirteen_eighteenMonths')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="19_24_months" :value="__('Monto 19-24 meses')" />
-                            <x-text-input id="19_24_months" class="block mt-1 w-full" type="text"
-                                name="19_24_months" :value="old('19_24_months')" />
-                            <x-input-error :messages="$errors->get('19_24_months')" class="mt-2" />
+                            <x-input-label for="nineteen_twentyfour_months" :value="__('Monto 19-24 meses')" />
+                            <x-text-input id="nineteen_twentyfour_months" class="block mt-1 w-full" type="text"
+                                name="nineteen_twentyfour_months" :value="old('nineteen_twentyfour_months')" />
+                            <x-input-error :messages="$errors->get('nineteen_twentyfour_months')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="nameIn19_24" :value="__('Nombre 19-24 meses')" />
-                            <x-text-input id="nameIn19_24" class="block mt-1 w-full" type="text"
-                                name="nameIn19_24" :value="old('nameIn19_24')" />
-                            <x-input-error :messages="$errors->get('nameIn19_24')" class="mt-2" />
+                            <x-input-label for="nameInNineteen_twentyfourMonths" :value="__('Nombre 19-24 meses')" />
+                            <x-text-input id="nameInNineteen_twentyfourMonths" class="block mt-1 w-full"
+                                type="text" name="nameInNineteen_twentyfourMonths" :value="old('nameInNineteen_twentyfourMonths')" />
+                            <x-input-error :messages="$errors->get('nameInNineteen_twentyfourMonths')" class="mt-2" />
                         </div>
 
                         <div>

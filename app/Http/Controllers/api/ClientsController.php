@@ -13,7 +13,6 @@ use App\Models\Agreements;
 use Illuminate\Http\Request;
 use App\Models\Clarification;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Debtor;
 use Illuminate\Support\Facades\Validator;
@@ -134,7 +133,7 @@ class ClientsController extends Controller
     public function checkmap(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
+            'debtor_id' => 'required',
             'route' => 'required',
         ]);
 
@@ -142,12 +141,13 @@ class ClientsController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $client_id = $request->input('client_id');
+        $debtor_id = $request->input('debtor_id');
         $route = $request->input('route');
 
-        $client = Clients::where('id', $client_id)->first();
+        // $client = Clients::where('id', $client_id)->first();
+        $deptor = Debtor::where('id', $debtor_id)->first();
 
-        if (!$client) {
+        if (!$deptor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
@@ -156,7 +156,7 @@ class ClientsController extends Controller
         }
 
 
-        $map = Maps::where('client_id', $client_id)->first();
+        $map = Maps::where('debtor_id', $deptor)->first();
 
         if ($map) {
 
@@ -193,7 +193,7 @@ class ClientsController extends Controller
 
 
         $res = Maps::create([
-            'client_id' => $client_id,
+            'debtor_id' => $debtor_id,
             'help' => $help,
             'clarification' => $clarification,
             'imNot' => $imNot,
@@ -365,100 +365,111 @@ class ClientsController extends Controller
         }
     }
 
-    public function pdf($client)
+    public function pdf(Request $request, $access_code)
     {
 
-        $client = Clients::where('access_code', $client)->first();
+        // $client = Clients::where('access_code', $client)->first();
 
-        $client->update([
-            'status' => 'pagando'
-        ]);
 
-        $client->save();
+        $fechaOriginal = $request->input('datePay');
+        $fechaConvertida = date('Y/m/d', strtotime($fechaOriginal));
 
-        if (!$client) {
+        $debtor = Debtor::where('access_code', $access_code)->first();
+
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Client not found',
+                'message' => 'Debtor not found',
                 'data' => []
             ], 404);
         }
+
+        $debtor->update([
+            'status' => 'activo'
+        ]);
+
+        $debtor->save();
 
         $fecha = Carbon::now();
 
         $dia = $fecha->format('d');
         $mes = $fecha->format('m');
         $ano = $fecha->format('Y');
-        $name = $client->name;
 
-        $deuda = Debts::where('client_id', $client->id)->first();
+        $name = $debtor->full_name;
+        $deudaConDescuento = $debtor->cash;
+        $deudaLetter = $debtor->nameInCash;
 
-        $porsentaje = 80;
+        $sce = $debtor->sce;
+        $minimum_to_collect = $debtor->minimum_to_collect;
 
-        $descuento = ($deuda->debt_amount / 100) * $porsentaje;
-
-        $deudaConDescuento = $deuda->debt_amount - $descuento;
+        $portfolio = $debtor->portfolio;
+        $credit_number = $debtor->credit_number;
 
         $pdf = Pdf::loadView('pdf.pdf', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deudaConDescuento
+            'deuda' => $deudaConDescuento,
+            'portfolio' => $portfolio,
+            'deudaLetter' => $deudaLetter,
+            'credit_number' => $credit_number,
+            'sce' => $sce,
+            'minimum_to_collect' => $minimum_to_collect,
+            'date' => $fechaConvertida
 
         ]);
 
         // return $pdf->stream();
-        return $pdf->download('contract_' . $client->name . '_' . $fecha->format('Y-m-d') . '.pdf');
+        return $pdf->download('contract_' . $debtor->full_name . '_' . $fecha->format('Y-m-d') . '.pdf');
     }
 
-    public function addagreements(Clients $client, Request $request)
+    public function addagreements(Debtor $debtor, Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'amount_per_installment' => 'required',
             'date_pay' => 'required',
         ]);
+
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $clientId = $client->id;
-        $amount_per_installment = $request->input('amount_per_installment');
+
         $date_pay = $request->input('date_pay');
 
         try {
+
             Agreements::create([
-                "client_id" => $clientId,
-                "status" => "activo",
+                "debtor_id" => $debtor->id,
+                "status" => "pendiente",
                 "agreement_type" => "contado",
                 "number_installments" => 1,
                 "unit_time" => "contado",
-                "amount_per_installment" => $amount_per_installment,
-
+                "amount_per_installment" => $debtor->cash,
             ]);
 
-            $clientDebt = Debts::where('client_id', $clientId)->first();
-            $clientDebt->update([
-                "remaining_debt_amount" => $amount_per_installment,
-                "next_payment_date" => $date_pay
+            $debtor->update([
+                "status" => "pagando",
+                "nextPayday" => $date_pay,
+                "remainingDebt" => $debtor->cash
             ]);
-            $clientDebt->save();
+
+            $debtor->save();
 
             Payments::create([
-                "debt_id" => $clientDebt->id,
-                "client_id" => $clientId,
+                "debtor_id" => $debtor->id,
                 "quota_number" => 1,
                 "payment_date" => $date_pay,
-                "paid_amount" => $amount_per_installment,
+                "paid_amount" => $debtor->cash,
                 "status" => "pendiente",
             ]);
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Contrato creado',
-
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -473,12 +484,12 @@ class ClientsController extends Controller
 
 
 
-    public function pdfplazos($client)
+    public function pdfplazos($access_code)
     {
 
-        $client = Clients::where('access_code', $client)->first();
+        $debtor = Debtor::where('access_code', $access_code)->first();
 
-        if (!$client) {
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
@@ -491,85 +502,124 @@ class ClientsController extends Controller
         $dia = $fecha->format('d');
         $mes = $fecha->format('m');
         $ano = $fecha->format('Y');
-        $name = $client->name;
+        $name = $debtor->full_name;
+        $payments = Payments::where('debtor_id', $debtor->id)->get();
 
-        $deuda = Debts::where('client_id', $client->id)->first();
+        $name = $debtor->full_name;
+        $deudaConDescuento = $debtor->cash;
+        $deudaLetter = $debtor->nameInCash;
 
-        $payments = Payments::where('debt_id', $deuda->id)->get();
+        $sce = $debtor->sce;
+        $minimum_to_collect = $debtor->minimum_to_collect;
 
+        $portfolio = $debtor->portfolio;
+        $credit_number = $debtor->credit_number;
 
         $pdf = Pdf::loadView('pdf.pdfplazos', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deuda->debt_amount,
+            'deuda' => $deudaConDescuento,
+            'portfolio' => $portfolio,
+            'deudaLetter' => $deudaLetter,
+            'credit_number' => $credit_number,
+            'sce' => $sce,
+            'minimum_to_collect' => $minimum_to_collect,
             'payments' => $payments
-
         ]);
 
-        // return $pdf->stream();
-        return $pdf->download('contract_' . $client->name . '_' . $fecha->format('Y-m-d') . '.pdf');
+        return $pdf->download('contract_' . $debtor->full_name . '_' . $fecha->format('Y-m-d') . '.pdf');
     }
 
     public function addagreementsCuotas(Request $request)
     {
 
-        $client = Clients::where('access_code', $request->input('access_code'))->first();
-
-        $client->update([
-            'status' => 'pagando'
+        $validator = Validator::make($request->all(), [
+            'access_code' => 'required',
+            'plazoFinal' => 'required',
+            'pagoFinal' => 'required',
+            'tipoFinal' => 'required',
+            'deudaFinal' => 'required',
         ]);
 
-        if (!$client) {
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Contrato creado',
+        //     'data' => $request->all()
+        // ]);
+
+        $access_code = $request->input('access_code');
+        $plazoFinal = $request->input('plazoFinal');
+        $pagoFinal = $request->input('pagoFinal');
+        $tipoFinal = $request->input('tipoFinal');
+        $deudaFinal = $request->input('deudaFinal');
+
+
+        // $client = Clients::where('access_code', $request->input('access_code'))->first();
+        $debtor = Debtor::where('access_code', $access_code)->first();
+
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Client not found',
+                'message' => 'Debtor not found',
                 'data' => $request->all()
             ], 404);
         }
 
-        $plazos = $request->input('plazoFinal');
-        $unit_time = $request->input('tipoFinal');
-        $pago = $request->input('pagoFinal');
+
+        // $client->update([
+        //     'status' => 'pagando'
+        // ]);
+
+        $debtor->update([
+            'status' => 'pagando',
+            'remainingDebt' => $deudaFinal,
+            "nextPayday" => Carbon::now()->addDays(1)
+        ]);
+
+        $debtor->save();
 
 
         Agreements::create([
-            "client_id" => $client->id,
-            "status" => "activo",
-            "agreement_type" => "plazos",
-            "number_installments" => $plazos,
-            "unit_time" => $unit_time,
-            "amount_per_installment" => $pago,
+            "debtor_id" => $debtor->id,
+            "status" => "pendiente",
+            "agreement_type" => "credito",
+            "number_installments" => $plazoFinal,
+            "unit_time" => $tipoFinal,
+            "amount_per_installment" => $pagoFinal
 
         ]);
 
-        $clientDebt = Debts::where('client_id', $client->id)->first();
-        $clientDebt->update([
-            "remaining_debt_amount" => $clientDebt->debt_amount,
-            "next_payment_date" => Carbon::now()->addDays(1),
-        ]);
-        $clientDebt->save();
+        // $clientDebt = Debts::where('client_id', $client->id)->first();
+        // $clientDebt->update([
+        //     "remaining_debt_amount" => $clientDebt->debt_amount,
+        //     "next_payment_date" => Carbon::now()->addDays(1),
+        // ]);
+        // $clientDebt->save();
 
         try {
             $fecha = null;
 
-            for ($i = 0; $i < $plazos; $i++) {
+            for ($i = 0; $i < $plazoFinal; $i++) {
                 $numeroInicial = $i + 1;
 
-                if ($unit_time == 'semanal') { // Sin comillas dobles
+                if ($tipoFinal == 'semanal') { // Sin comillas dobles
                     $fecha = Carbon::now()->addDays($numeroInicial * 7);
-                } elseif ($unit_time == 'quincenal') { // Sin comillas dobles
+                } elseif ($tipoFinal == 'quincenal') { // Sin comillas dobles
                     $fecha = Carbon::now()->addDays($numeroInicial * 15);
-                } elseif ($unit_time == 'mensual') { // Sin comillas dobles
+                } elseif ($tipoFinal == 'mensual') { // Sin comillas dobles
                     $fecha = Carbon::now()->addMonths($numeroInicial);
                 }
                 Payments::create([
-                    "debt_id" => $clientDebt->id,
-                    "client_id" => $client->id,
+                    "debtor_id" => $debtor->id,
                     "quota_number" => $i + 1,
                     "payment_date" => $fecha,
-                    "paid_amount" => $pago,
+                    "paid_amount" => $pagoFinal,
                     "status" => "pendiente",
                 ]);
             }
@@ -589,17 +639,32 @@ class ClientsController extends Controller
         }
     }
 
-    public function setagreements(Request $request)
+    public function setagreements(Debtor $debtor, Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'cantidadPago' => 'required',
+            'tipoCuonta' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
         $cantidadPago = $request->input('cantidadPago');
         $tipoCuonta = $request->input('tipoCuonta');
 
-        $oneToThree = 11360.52;
-        $fourToSix = 12622.80;
-        $sevenToTwelve = 14516.22;
-        $thirteenToEighteen = 15778.50;
-        $nineteenToTwentyFour = 17671.92;
+        // $oneToThree = 11360.52;
+        // $fourToSix = 12622.80;
+        // $sevenToTwelve = 14516.22;
+        // $thirteenToEighteen = 15778.50;
+        // $nineteenToTwentyFour = 17671.92;
 
+        $oneToThree = $debtor->one_three_months;
+        $fourToSix = $debtor->four_six_months;
+        $sevenToTwelve = $debtor->seven_twelve_months;
+        $thirteenToEighteen = $debtor->thirteen_eighteen_months;
+        $nineteenToTwentyFour = $debtor->nineteen_twentyfour_months;
 
         $fases = [
             "primera fase" => [
@@ -674,17 +739,42 @@ class ClientsController extends Controller
 
         $numeroCuotas = $tipoCuonta == "mensual" ? $repeticiones : ($tipoCuonta == "quincenal" ? $repeticiones * 2 : $repeticiones * 4);
 
-        $valor_a_pagar = $valor_mas_cercano ? $valor_mas_cercano * $numeroCuotas : $ultimo_valor * $numeroCuotas;
+        $buscarPago = $valor_mas_cercano ? $valor_mas_cercano * $numeroCuotas : $ultimo_valor * $numeroCuotas;
+
+        $deudaPago = self::encontrarNumeroMasCercano($buscarPago, [$oneToThree, $fourToSix, $sevenToTwelve, $thirteenToEighteen, $nineteenToTwentyFour]);
+
+        $pagoPorCuota = $valor_mas_cercano ?? $ultimo_valor;
+
+        $tipoCuontaUpdate = $tipoCuonta == "mensual" ? "mensuales" : ($tipoCuonta == "quincenal" ? "quincenales" : "semanales");
 
         return response()->json([
             'status' => 'success',
             'message' => 'Contrato actualizado',
             'data' => [
-                'valor_a_pagar' => $valor_a_pagar,
+                'deudaPago' => $deudaPago,
                 'numeroCuotas' => $numeroCuotas,
-                'valor_mas_cercano' => $valor_mas_cercano ?? $ultimo_valor,
-                'ultimo_valor' => $ultimo_valor
+                'pagoPorCuota' => $pagoPorCuota,
+                'ultimo_valor' => $ultimo_valor,
+                'message' => $pagoPorCuota == $ultimo_valor,
+                'tipoCuonta' => $tipoCuontaUpdate
             ]
         ]);
+    }
+
+    private function encontrarNumeroMasCercano($valorDeseado, $numeros)
+    {
+        $numeroMasCercano = null;
+        $diferenciaMasCercana = PHP_INT_MAX;
+
+        foreach ($numeros as $numero) {
+            $diferencia = abs($valorDeseado - $numero);
+
+            if ($diferencia < $diferenciaMasCercana) {
+                $diferenciaMasCercana = $diferencia;
+                $numeroMasCercano = $numero;
+            }
+        }
+
+        return $numeroMasCercano;
     }
 }

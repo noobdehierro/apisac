@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('agreements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('debtor_id');
             $table->string('status', 20);
             $table->string('agreement_type', 50);
             $table->string('number_installments')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('amount_per_installment')->nullable();
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
         });
     }
 

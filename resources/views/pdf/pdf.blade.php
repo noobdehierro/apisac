@@ -66,7 +66,7 @@
         </div>
         <div>
             <div class="fecha">
-                <p>Ciudad de méxico {{$dia}} de {{$mes}} de {{$ano}}</p>
+                <p>Ciudad de méxico {{ $dia }} de {{ $mes }} de {{ $ano }}</p>
             </div>
         </div>
 
@@ -78,10 +78,10 @@
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
-                EMITIDO POR ************** INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA OTRA
-                PARTE EL C. {{$name}} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span> CON
-                DOMICILIO EN “Calle. **********
-                ********,COLONIA ********,CIUDAD ***************, Ciudad *******, C.P. ******”. AL TENOR DE LAS
+                EMITIDO POR {{ $portfolio }} INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA
+                OTRA
+                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span>. AL TENOR
+                DE LAS
                 SIGUIENTES CLÁUSULAS:
             </p>
             <h2>CLAUSULAS</h2>
@@ -90,8 +90,9 @@
             <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> IBKAN CAPITAL, S.A.P.I. DE
                 C.V., (“IBKAN”), <span class="red">POR</span> LA
                 CANTIDAD DE
-                ${{$deuda}} (******* ********* ********* ******* PESOS **/100 M.N.) CANTIDAD DERIVADA DEL CRÉDITO NO.
-                ************** EMITIDO POR ********* ******* S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
+                ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
+                CRÉDITO NO.
+                {{ $credit_number }} EMITIDO POR {{ $portfolio }} S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
             </P>
 
             <h3>CLAUSULA SEGUNDA</h3>
@@ -99,7 +100,7 @@
             <p class="parrafo"><span class="red">EN ESTE SENTIDO,</span> EL TITULAR OFRECE LIQUIDAR EL ADEUDO
                 MENCIONADO CON ANTERIORIDAD CON LA
                 CANTIDAD DE
-                $**,***.00(********* *** ********* ******** * ****** PESOS 00/100 <span class="red">M.N.) PROPONIENDO
+                ${{ $deuda }}{{ $deudaLetter }}<span class="red"> PROPONIENDO
                     EL SIGUIENTE ESQUEMA
                     DE PAGOS</span>:
             </p>
@@ -113,9 +114,9 @@
                 </tr>
                 <tr>
                     <td style="background-color: #4f81bd; color: white; font-size: 12px">1</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">$10,000.00(DIEZ MIL PESOS
-                        00/100 M.N.)</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">02/11/2021</td>
+                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">
+                        ${{ $deuda }}{{ $deudaLetter }}</td>
+                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">{{ $date }}</td>
                     <td style="background-color: #d0d8e7; color: black; font-size: 12px">A CAPITAL</td>
                 </tr>
             </table>

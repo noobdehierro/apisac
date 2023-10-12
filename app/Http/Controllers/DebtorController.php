@@ -49,16 +49,16 @@ class DebtorController extends Controller
             'minimum_to_collect' => 'required',
             'cash' => 'required',
             'nameInCash' => 'required',
-            '1_3_months' => 'required',
-            'nameIn1_3' => 'nullable',
-            '4_6_months' => 'required',
-            'nameIn4_6' => 'nullable',
-            '7_12_months' => 'required',
-            'nameIn7_12' => 'nullable',
-            '13_18_months' => 'required',
-            'nameIn13_18' => 'nullable',
-            '19_24_months' => 'required',
-            'nameIn19_24' => 'nullable',
+            'one_three_months' => 'required',
+            'nameInOne_threeMonths' => 'nullable',
+            'four_six_months' => 'required',
+            'nameInFour_sixMonths' => 'nullable',
+            'seven_twelve_months' => 'required',
+            'nameInSeven_twelveMonths' => 'nullable',
+            'thirteen_eighteen_months' => 'required',
+            'nameInThirteen_eighteenMonths' => 'nullable',
+            'nineteen_twentyfour_months' => 'required',
+            'nameInNineteen_twentyfourMonths' => 'nullable',
             'payment_reference' => 'required',
             'agreement' => 'required',
             'payment_bank' => 'required',
@@ -107,7 +107,43 @@ class DebtorController extends Controller
      */
     public function update(Request $request, Debtor $debtor)
     {
-        //
+        $request->validate([
+            'access_code' => 'required',
+            'credit_number' => 'required',
+            'full_name' => 'required',
+            'status' => 'required',
+            'remainingDebt' => 'nullable',
+            'nextPayday' => 'nullable',
+            'capital' => 'required',
+            'sce' => 'required',
+            'minimum_to_collect' => 'required',
+            'cash' => 'required',
+            'nameInCash' => 'required',
+            'one_three_months' => 'required',
+            'nameInOne_threeMonths' => 'nullable',
+            'four_six_months' => 'required',
+            'nameInFour_sixMonths' => 'nullable',
+            'seven_twelve_months' => 'required',
+            'nameInSeven_twelveMonths' => 'nullable',
+            'thirteen_eighteen_months' => 'required',
+            'nameInThirteen_eighteenMonths' => 'nullable',
+            'nineteen_twentyfour_months' => 'required',
+            'nameInNineteen_twentyfourMonths' => 'nullable',
+            'payment_reference' => 'required',
+            'agreement' => 'required',
+            'payment_bank' => 'required',
+            'interbank_key' => 'required',
+            'product' => 'required',
+            'phone' => 'required',
+            'email' => 'nullable',
+            'portfolio' => 'required',
+            'phone_1' => 'nullable',
+            'phone_2' => 'nullable',
+        ]);
+
+        $debtor->update($request->all());
+
+        return redirect()->route('debtors.index')->with('success', 'Debtor updated successfully');
     }
 
     /**

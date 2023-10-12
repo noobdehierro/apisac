@@ -38,6 +38,17 @@
                             <x-input-error :messages="$errors->get('paid_amount')" class="mt-2" />
                         </div>
 
+                        <div>
+                            <x-input-label for="status" :value="__('Estado')" />
+                            <select name="status" class="block mt-1 w-full">
+                                <option value="">Seleccione un estado</option>
+                                <option value="pagado" selected>Pagado</option>
+                                <option value="pendiente">Pendiente</option>
+                            </select>
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+
+                        </div>
+
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button>

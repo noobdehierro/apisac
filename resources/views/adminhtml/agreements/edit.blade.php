@@ -25,20 +25,29 @@
                         @csrf
                         @method('PUT')
 
-
                         <div>
                             <x-input-label for="status" :value="__('Estado')" />
-                            <x-text-input id="status" class="block mt-1 w-full" type="text" name="status"
-                                :value="old('status', $agreements->status)" autofocus autocomplete="status" />
+                            <select name="status" class="block mt-1 w-full">
+                                <option value="">Seleccione un estado</option>
+                                <option value="pagado" @if ($agreements->status == 'pagado') selected @endif>Pagado
+                                </option>
+                                <option value="pendiente" @if ($agreements->status == 'pendiente') selected @endif>Pendiente
+                                </option>
+                            </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
 
                         <div>
                             <x-input-label for="agreement_type" :value="__('Tipo de acuerdo')" />
-                            <x-text-input id="agreement_type" class="block mt-1 w-full" type="text"
-                                name="agreement_type" :value="old('agreement_type', $agreements->agreement_type)" autofocus autocomplete="agreement_type" />
-                            <x-input-error :messages="$errors->get('agreement_type')" class="mt-2" />
+                            <select name="agreement_type" class="block mt-1 w-full">
+                                <option value="">Seleccione un tipo de acuerdo</option>
+                                <option value="contado" @if ($agreements->agreement_type == 'contado') selected @endif>Contado
+                                </option>
+                                <option value="credito" @if ($agreements->agreement_type == 'credito') selected @endif>Credito
+                                </option>
+                            </select>
                         </div>
+
 
                         <div>
                             <x-input-label for="number_installments" :value="__('Numero de cuotas')" />
@@ -50,9 +59,17 @@
 
                         <div>
                             <x-input-label for="unit_time" :value="__('Unidad de tiempo')" />
-                            <x-text-input id="unit_time" class="block mt-1 w-full" type="text" name="unit_time"
-                                :value="old('unit_time', $agreements->unit_time)" autofocus autocomplete="unit_time" />
-                            <x-input-error :messages="$errors->get('unit_time')" class="mt-2" />
+                            <select name="unit_time" class="block mt-1 w-full">
+                                <option value="">Seleccione una unidad de tiempo</option>
+                                <option value="contado" @if ($agreements->unit_time == 'contado') selected @endif>Contado
+                                </option>
+                                <option value="semanal" @if ($agreements->unit_time == 'semanal') selected @endif>Semanal
+                                </option>
+                                <option value="quincenal" @if ($agreements->unit_time == 'quincenal') selected @endif>Quincenal
+                                </option>
+                                <option value="mensual" @if ($agreements->unit_time == 'mensual') selected @endif>Mensual
+                                </option>
+                            </select>
                         </div>
 
                         <div>
