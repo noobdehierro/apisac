@@ -14,14 +14,14 @@
                         @csrf
 
                         <div>
-                            <x-input-label for="debt_id" :value="__('Deuda')" />
-                            <select name="debt_id" id="debt_id" class="block mt-1 w-full">
+                            <x-input-label for="debtor_id" :value="__('Deuda')" />
+                            <select name="debtor_id" id="debtor_id" class="block mt-1 w-full">
                                 <option value="">Seleccione el cliente deudor</option>
                                 @foreach ($dataDebts as $dataDebt)
-                                    <option value="{{ $dataDebt->debt_id }}">{{ $dataDebt->client_name }}</option>
+                                    <option value="{{ $dataDebt->id }}">{{ $dataDebt->full_name }}</option>
                                 @endforeach
                             </select>
-                            <x-input-error :messages="$errors->get('debt_id')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('debtor_id')" class="mt-2" />
                         </div>
 
                         <div>

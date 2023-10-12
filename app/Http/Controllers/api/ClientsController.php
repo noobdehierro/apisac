@@ -15,6 +15,7 @@ use App\Models\Clarification;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Debtor;
 use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
@@ -36,38 +37,51 @@ class ClientsController extends Controller
         }
 
         $access_code = $request->input('access_code');
-        $client = Clients::where('access_code', $access_code)->first();
+        $debtors = Debtor::where('access_code', $access_code)->first();
 
-        if (!$client) {
+        if (!$debtors) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Client not found',
+                'message' => 'Debtor not found',
                 'data' => []
             ], 404);
         }
 
-        if ($client->status != 'pagando') {
-            $client->update([
+        if ($debtors->status != 'pagando') {
+            $debtors->update([
                 'status' => 'activo'
             ]);
         }
 
-
-        $clienteActivo = Clients::where('id', $client->id)->first();
-
-        $debtActive = Debts::where('client_id', $client->id)->first();
-
-        $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
+        $debtorsActivo = Debtor::where('id', $debtors->id)->first();
+        $paymentsActive = Payments::where('debtor_id', $debtorsActivo->id)->get();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Client found',
+            'message' => 'Debtor found',
             'data' => [
-                'client' => $clienteActivo,
-                'payments' => $paymentsActive,
-                'debt' => $debtActive
+                'debtors' => $debtorsActivo,
+                'payments' => $paymentsActive
             ]
         ], 200);
+
+        // $payments
+
+        // $clienteActivo = Clients::where('id', $client->id)->first();
+
+        // $debtActive = Debts::where('client_id', $client->id)->first();
+
+        // $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
+
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Client found',
+        //     'data' => [
+        //         'client' => $clienteActivo,
+        //         'payments' => $paymentsActive,
+        //         'debt' => $debtActive
+        //     ]
+        // ], 200);
     }
 
     public function help(Request $request)

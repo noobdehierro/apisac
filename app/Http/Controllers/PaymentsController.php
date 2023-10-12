@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
+use App\Models\Debtor;
 use App\Models\Debts;
 use App\Models\Payments;
 use Illuminate\Http\Request;
@@ -19,9 +20,12 @@ class PaymentsController extends Controller
     public function create()
     {
 
-        $dataDebts = Debts::select('debts.id as debt_id', 'clients.name as client_name')
-            ->join('clients', 'debts.client_id', '=', 'clients.id')
-            ->get();
+        // $dataDebts = Debts::select('debts.id as debt_id', 'clients.name as client_name')
+        //     ->join('clients', 'debts.client_id', '=', 'clients.id')
+        //     ->get();
+
+        $dataDebts = Debtor::all();
+
 
 
         return view('adminhtml.payments.create', compact('dataDebts'));
@@ -32,7 +36,7 @@ class PaymentsController extends Controller
 
 
         $request->validate([
-            'debt_id' => 'required:exists:debts,id',
+            'debtor_id' => 'required:exists:debtors,id',
             'payment_date' => 'required',
             'paid_amount' => 'required',
         ]);

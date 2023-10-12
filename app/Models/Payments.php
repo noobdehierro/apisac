@@ -10,7 +10,7 @@ class Payments extends Model
     use HasFactory;
 
     protected $fillable = [
-        'debt_id',
+        'debtor_id',
         'quota_number',
         'payment_date',
         'paid_amount',
@@ -18,8 +18,8 @@ class Payments extends Model
         'created_at',
     ];
 
-    public function debt()
+    public function debtor()
     {
-        return $this->belongsTo(Debts::class);
+        return $this->belongsTo(Debtor::class);
     }
 }

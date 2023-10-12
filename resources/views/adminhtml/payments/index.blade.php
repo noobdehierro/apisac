@@ -53,11 +53,11 @@
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $payment->debt_id }}
+                                                {{ $payment->debtor_id }}
                                             </th>
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $payment->debt->client->name }}
+                                                {{ $payment->debtor->full_name }}
                                             </th>
 
                                             <th scope="row"
