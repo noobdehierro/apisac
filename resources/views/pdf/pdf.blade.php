@@ -80,7 +80,7 @@
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
                 EMITIDO POR {{ $portfolio }} INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA
                 OTRA
-                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span>. AL TENOR
+                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR
                 DE LAS
                 SIGUIENTES CLÁUSULAS:
             </p>
@@ -135,15 +135,15 @@
             <table style="border-spacing: 10px">
                 <tr>
                     <th align="left">BANCO</th>
-                    <th align="left">BBVA BANCOMER</th>
+                    <th align="left">{{ $payment_bank }}</th>
                 </tr>
                 <tr>
                     <th align="left">CONVENIO</th>
-                    <th align="left">001850709</th>
+                    <th align="left">{{ $agreement }}</th>
                 </tr>
                 <tr>
                     <th align="left">REFERENCIA</th>
-                    <th align="left">54201500009982232</th>
+                    <th align="left">{{ $payment_reference }}</th>
                 </tr>
             </table>
             <p class="parrafo">
@@ -152,11 +152,11 @@
             <table style="border-spacing: 10px">
                 <tr>
                     <th align="left">CLABE</th>
-                    <th align="left">012180001172406193</th>
+                    <th align="left">{{ $interbank_key }}</th>
                 </tr>
                 <tr>
                     <th align="left">REFERENCIA</th>
-                    <th align="left">54201500009982232</th>
+                    <th align="left">{{ $payment_reference }}</th>
                 </tr>
             </table>
             <p class="parrafo">ES IMPORTANTE QUE VALIDE QUE EL PAGO SE EFECTUE A NOMBRE DE LA EMPRESA Y NO A NOMBRE DE

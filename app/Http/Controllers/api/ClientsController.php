@@ -5,8 +5,6 @@ namespace App\Http\Controllers\api;
 use Carbon\Carbon;
 use App\Models\Help;
 use App\Models\Maps;
-use App\Models\Debts;
-use App\Models\Clients;
 use App\Models\Payments;
 use App\Models\Unknowns;
 use App\Models\Agreements;
@@ -63,30 +61,12 @@ class ClientsController extends Controller
                 'payments' => $paymentsActive
             ]
         ], 200);
-
-        // $payments
-
-        // $clienteActivo = Clients::where('id', $client->id)->first();
-
-        // $debtActive = Debts::where('client_id', $client->id)->first();
-
-        // $paymentsActive = Payments::where('debt_id', $debtActive->id)->get();
-
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Client found',
-        //     'data' => [
-        //         'client' => $clienteActivo,
-        //         'payments' => $paymentsActive,
-        //         'debt' => $debtActive
-        //     ]
-        // ], 200);
     }
 
     public function help(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
+            'debtor_id' => 'required',
             'cel' => 'nullable',
             'telephone' => 'nullable',
             'email' => ['nullable', 'email'],
@@ -97,15 +77,14 @@ class ClientsController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $client_id = $request->input('client_id');
+        $debtor_id = $request->input('debtor_id');
         $cel = $request->input('cel') ?? '';
         $telephone = $request->input('telephone') ?? '';
         $email = $request->input('email') ?? '';
         $telephoneContact = $request->input('telephoneContact') ?? '';
+        $debtor = Debtor::where('id', $debtor_id)->first();
 
-        $client = Clients::where('id', $client_id)->first();
-
-        if (!$client) {
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
@@ -114,14 +93,12 @@ class ClientsController extends Controller
         }
 
         $res = Help::create([
-            'client_id' => $client_id,
+            'debtor_id' => $debtor->id,
             'cel' => $cel,
             'telephone' => $telephone,
             'email' => $email,
             'telephoneContact' => $telephoneContact
         ]);
-
-
 
         return response()->json([
             'status' => 'success',
@@ -213,10 +190,10 @@ class ClientsController extends Controller
     public function clarification(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
-            'cel' => 'required',
-            'telephone' => 'required',
-            'email' => 'required|email',
+            'debtor_id' => 'required',
+            'cel' => 'nullable',
+            'telephone' => 'nullable',
+            'email' => 'nullable|email',
             'clarification' => 'required',
 
         ]);
@@ -225,16 +202,17 @@ class ClientsController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $client_id = $request->input('client_id');
+        $debtor_id = $request->input('debtor_id');
         $cel = $request->input('cel');
         $telephone = $request->input('telephone');
         $email = $request->input('email');
         $clarification = $request->input('clarification');
 
 
-        $client = Clients::where('id', $client_id)->first();
+        // $client = Clients::where('id', $client_id)->first();
+        $debtor = Debtor::where('id', $debtor_id)->first();
 
-        if (!$client) {
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
@@ -243,7 +221,7 @@ class ClientsController extends Controller
         }
 
         $data = Clarification::create([
-            'client_id' => $client_id,
+            'debtor_id' => $debtor->id,
             'cel' => $cel,
             'telephone' => $telephone,
             'email' => $email,
@@ -260,7 +238,7 @@ class ClientsController extends Controller
     public function unknowns(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
+            'debtor_id' => 'required',
             'response' => 'required',
         ]);
 
@@ -268,12 +246,14 @@ class ClientsController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $client_id = $request->input('client_id');
+        $debtor_id = $request->input('debtor_id');
         $response = $request->input('response');
 
-        $client = Clients::where('id', $client_id)->first();
+        // $client = Clients::where('id', $client_id)->first();
 
-        if (!$client) {
+        $debtor = Debtor::where('id', $debtor_id)->first();
+
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
@@ -282,7 +262,7 @@ class ClientsController extends Controller
         }
 
         $data = Unknowns::create([
-            'client_id' => $client_id,
+            'debtor_id' => $debtor_id,
             'response' => $response
         ]);
 
@@ -293,77 +273,79 @@ class ClientsController extends Controller
         ]);
     }
 
-    public function checkagreements(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
-            'number_installments' => 'required',
-            'unit_time' => 'required',
-            'amount_per_installment' => 'required',
-        ]);
+    // public function checkagreements(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'debtor_id' => 'required',
+    //         'number_installments' => 'required',
+    //         'unit_time' => 'required',
+    //         'amount_per_installment' => 'required',
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json(['error' => $validator->errors()], 400);
+    //     }
 
-        $client_id = $request->input('client_id');
-        $number_installments = $request->input('number_installments');
-        $unit_time = $request->input('unit_time');
-        $amount_per_installment = $request->input('amount_per_installment');
+    //     $debtor_id = $request->input('debtor_id');
+    //     $number_installments = $request->input('number_installments');
+    //     $unit_time = $request->input('unit_time');
+    //     $amount_per_installment = $request->input('amount_per_installment');
 
-        $client = Clients::where('id', $client_id)->first();
+    //     // $client = Clients::where('id', $client_id)->first();
+    //     $debtor = Debtor::where('id', $debtor_id)->first();
 
-        if (!$client) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Client not found',
-                'data' => []
-            ], 404);
-        }
+    //     if (!$debtor) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Client not found',
+    //             'data' => []
+    //         ], 404);
+    //     }
 
-        $agreement = Agreements::where('client_id', $client_id)->first();
+    //     // $agreement = Agreements::where('client_id', $client_id)->first();
+    //     $agreement = Agreements::where('debtor_id', $debtor_id)->first();
 
-        if ($agreement) {
+    //     if ($agreement) {
 
-            $agreement->update([
-                'number_installments' => $number_installments,
-                'unit_time' => $unit_time,
-                'amount_per_installment' => $amount_per_installment
-            ]);
+    //         $agreement->update([
+    //             'number_installments' => $number_installments,
+    //             'unit_time' => $unit_time,
+    //             'amount_per_installment' => $amount_per_installment
+    //         ]);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Contrato actualizado',
-                'data' => $agreement
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Contrato actualizado',
+    //             'data' => $agreement
 
-            ]);
-        }
+    //         ]);
+    //     }
 
 
 
-        try {
-            $data = Agreements::create([
-                'client_id' => $client_id,
-                'status' => 'pendiente',
-                'agreement_type' => 'contado',
-                'number_installments' => $number_installments,
-                'unit_time' => $unit_time,
-                'amount_per_installment' => $amount_per_installment
-            ]);
+    //     try {
+    //         $data = Agreements::create([
+    //             'client_id' => $client_id,
+    //             'status' => 'pendiente',
+    //             'agreement_type' => 'contado',
+    //             'number_installments' => $number_installments,
+    //             'unit_time' => $unit_time,
+    //             'amount_per_installment' => $amount_per_installment
+    //         ]);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Contrato creado',
-                'data' => $data
-            ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $th->getMessage(),
-                'data' => []
-            ], 500);
-        }
-    }
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Contrato creado',
+    //             'data' => $data
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $th->getMessage(),
+    //             'data' => []
+    //         ], 500);
+    //     }
+    // }
 
     public function pdf(Request $request, $access_code)
     {
@@ -406,6 +388,11 @@ class ClientsController extends Controller
         $portfolio = $debtor->portfolio;
         $credit_number = $debtor->credit_number;
 
+        $payment_bank = $debtor->payment_bank;
+        $payment_reference = $debtor->payment_reference;
+        $agreement = $debtor->agreement;
+        $interbank_key = $debtor->interbank_key;
+
         $pdf = Pdf::loadView('pdf.pdf', [
             'dia' => $dia,
             'mes' => $mes,
@@ -417,7 +404,11 @@ class ClientsController extends Controller
             'credit_number' => $credit_number,
             'sce' => $sce,
             'minimum_to_collect' => $minimum_to_collect,
-            'date' => $fechaConvertida
+            'date' => $fechaConvertida,
+            'payment_bank' => $payment_bank,
+            'payment_reference' => $payment_reference,
+            'agreement' => $agreement,
+            'interbank_key' => $interbank_key
 
         ]);
 
@@ -506,27 +497,66 @@ class ClientsController extends Controller
         $payments = Payments::where('debtor_id', $debtor->id)->get();
 
         $name = $debtor->full_name;
-        $deudaConDescuento = $debtor->cash;
-        $deudaLetter = $debtor->nameInCash;
+
 
         $sce = $debtor->sce;
         $minimum_to_collect = $debtor->minimum_to_collect;
-
         $portfolio = $debtor->portfolio;
         $credit_number = $debtor->credit_number;
+
+        $payment_bank = $debtor->payment_bank;
+        $payment_reference = $debtor->payment_reference;
+        $agreement = $debtor->agreement;
+        $remainingDebt = $debtor->remainingDebt;
+
+        $primeraCuota = $debtor->one_three_months;
+        $segundaCuota = $debtor->four_six_months;
+        $terceraCuota = $debtor->seven_twelve_months;
+        $cuartaCuota = $debtor->thirteen_eighteen_months;
+        $quintaCuota = $debtor->nineteen_twentyfour_months;
+
+        // dd($debtor);
+        $deudaConPlazos = null;
+        $deudaConPlazosLetter = null;
+
+        $dato = self::encontrarNumeroMasCercano($remainingDebt, [$primeraCuota, $segundaCuota, $terceraCuota, $cuartaCuota, $quintaCuota]);
+
+        if ($dato == $primeraCuota) {
+            $deudaConPlazos = $primeraCuota;
+            $deudaConPlazosLetter = $debtor->nameInOne_threeMonths;
+        } elseif ($dato == $segundaCuota) {
+            $deudaConPlazos = $segundaCuota;
+            $deudaConPlazosLetter = $debtor->nameInFour_sixMonths;
+        } elseif ($dato == $terceraCuota) {
+            $deudaConPlazos = $terceraCuota;
+            $deudaConPlazosLetter = $debtor->nameInSeven_twelveMonths;
+        } elseif ($dato == $cuartaCuota) {
+            $deudaConPlazos = $cuartaCuota;
+            $deudaConPlazosLetter = $debtor->nameInThirteen_eighteenMonths;
+        } elseif ($dato == $quintaCuota) {
+            $deudaConPlazos = $quintaCuota;
+            $deudaConPlazosLetter = $debtor->nameInNineteen_twentyfourMonths;
+        }
+
+        // dd($deudaConPlazos, $deudaConPlazosLetter);
+
 
         $pdf = Pdf::loadView('pdf.pdfplazos', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deudaConDescuento,
             'portfolio' => $portfolio,
-            'deudaLetter' => $deudaLetter,
             'credit_number' => $credit_number,
             'sce' => $sce,
             'minimum_to_collect' => $minimum_to_collect,
-            'payments' => $payments
+            'payments' => $payments,
+            'payment_bank' => $payment_bank,
+            'payment_reference' => $payment_reference,
+            'agreement' => $agreement,
+            'deudaConPlazos' => $deudaConPlazos,
+            'deudaConPlazosLetter' => $deudaConPlazosLetter,
+            'interbank_key' => $debtor->interbank_key
         ]);
 
         return $pdf->download('contract_' . $debtor->full_name . '_' . $fecha->format('Y-m-d') . '.pdf');

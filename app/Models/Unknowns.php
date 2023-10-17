@@ -10,12 +10,12 @@ class Unknowns extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id',
+        'debtor_id',
         'response',
     ];
 
-    public function client()
+    public function debtor()
     {
-        return $this->belongsTo(Clients::class);
+        return $this->belongsTo(Debtors::class);
     }
 }

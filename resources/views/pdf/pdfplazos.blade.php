@@ -78,10 +78,9 @@
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
-                EMITIDO POR ************** INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA OTRA
-                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR <span class="red">DEL CRÉDITO</span> CON
-                DOMICILIO EN “Calle. **********
-                ********,COLONIA ********,CIUDAD ***************, Ciudad *******, C.P. ******”. AL TENOR DE LAS
+                EMITIDO POR {{ $payment_bank }} INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA
+                OTRA
+                PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR DE LAS
                 SIGUIENTES CLÁUSULAS:
             </p>
             <h2>CLAUSULAS</h2>
@@ -90,9 +89,9 @@
             <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> IBKAN CAPITAL, S.A.P.I. DE
                 C.V., (“IBKAN”), <span class="red">POR</span> LA
                 CANTIDAD DE
-                ${{ $deuda }} (******* ********* ********* ******* PESOS **/100 M.N.) CANTIDAD DERIVADA DEL
+                ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
                 CRÉDITO NO.
-                ************** EMITIDO POR ********* ******* S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
+                {{ $credit_number }} EMITIDO POR {{ $payment_bank }} S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
             </P>
 
             <h3>CLAUSULA SEGUNDA</h3>
@@ -100,9 +99,9 @@
             <p class="parrafo"><span class="red">EN ESTE SENTIDO,</span> EL TITULAR OFRECE LIQUIDAR EL ADEUDO
                 MENCIONADO CON ANTERIORIDAD CON LA
                 CANTIDAD DE
-                $**,***.00(********* *** ********* ******** * ****** PESOS 00/100 <span class="red">M.N.) PROPONIENDO
-                    EL SIGUIENTE ESQUEMA
-                    DE PAGOS</span>:
+                ${{ $deudaConPlazos }} {{ $deudaConPlazosLetter }} PROPONIENDO
+                EL SIGUIENTE ESQUEMA
+                DE PAGOS</span>:
             </p>
 
             <table border="1" cellpadding="10" width="100%" style="font-size: 12px">
@@ -117,7 +116,8 @@
                     <tr>
                         <td style="background-color: #4f81bd; color: white; font-size: 12px">
                             {{ $payment->quota_number }}</td>
-                        <td style="background-color: #d0d8e7; color: black; font-size: 12px">{{ $payment->paid_amount }}
+                        <td style="background-color: #d0d8e7; color: black; font-size: 12px">
+                            {{ $payment->paid_amount }}
                         </td>
                         <td style="background-color: #d0d8e7; color: black; font-size: 12px">
                             {{ $payment->payment_date }}
@@ -143,15 +143,15 @@
             <table style="border-spacing: 10px">
                 <tr>
                     <th align="left">BANCO</th>
-                    <th align="left">BBVA BANCOMER</th>
+                    <th align="left">{{ $payment_bank }}</th>
                 </tr>
                 <tr>
                     <th align="left">CONVENIO</th>
-                    <th align="left">001850709</th>
+                    <th align="left">{{ $agreement }}</th>
                 </tr>
                 <tr>
                     <th align="left">REFERENCIA</th>
-                    <th align="left">54201500009982232</th>
+                    <th align="left">{{ $payment_reference }}</th>
                 </tr>
             </table>
             <p class="parrafo">
@@ -160,11 +160,11 @@
             <table style="border-spacing: 10px">
                 <tr>
                     <th align="left">CLABE</th>
-                    <th align="left">012180001172406193</th>
+                    <th align="left">{{ $interbank_key }}</th>
                 </tr>
                 <tr>
                     <th align="left">REFERENCIA</th>
-                    <th align="left">54201500009982232</th>
+                    <th align="left">{{ $payment_reference }}</th>
                 </tr>
             </table>
             <p class="parrafo">ES IMPORTANTE QUE VALIDE QUE EL PAGO SE EFECTUE A NOMBRE DE LA EMPRESA Y NO A NOMBRE DE
