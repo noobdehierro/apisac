@@ -19,7 +19,7 @@ class Maps extends Model
         'Installments',
     ];
 
-    public function deptor()
+    public function debtor()
     {
         return $this->belongsTo(Debtor::class);
     }

@@ -122,18 +122,22 @@ class ClientsController extends Controller
         $route = $request->input('route');
 
         // $client = Clients::where('id', $client_id)->first();
-        $deptor = Debtor::where('id', $debtor_id)->first();
+        $debtor = Debtor::where('id', $debtor_id)->first();
 
-        if (!$deptor) {
+
+        if (!$debtor) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Client not found',
                 'data' => []
             ], 404);
         }
+        // dd($debtor);
 
 
-        $map = Maps::where('debtor_id', $deptor)->first();
+        $map = Maps::where('debtor_id', $debtor->id)->first();
+
+        // dd($map);
 
         if ($map) {
 

@@ -19,6 +19,6 @@ class Help extends Model
 
     public function debtor()
     {
-        return $this->belongsTo(Debtors::class);
+        return $this->belongsTo(Debtor::class);
     }
 }

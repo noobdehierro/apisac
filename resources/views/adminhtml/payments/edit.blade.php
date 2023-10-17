@@ -25,22 +25,6 @@
                         @csrf
                         @method('PUT')
 
-                        {{-- <div>
-                            <x-input-label for="debt_id" :value="__('Deuda')" />
-                            <select name="debt_id" id="debt_id" class="block mt-1 w-full">
-                                <option value="">Seleccione el cliente deudor</option>
-                                @foreach ($dataDebts as $dataDebt)
-                                    @if ($dataDebt->debt_id == $payments->debt_id)
-                                        <option value="{{ $dataDebt->debt_id }}" selected>{{ $dataDebt->client_name }}
-                                        </option>
-                                    @else
-                                        <option value="{{ $dataDebt->debt_id }}">{{ $dataDebt->client_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('debt_id')" class="mt-2" />
-                        </div> --}}
-
                         <div>
                             <x-input-label for="payment_date" :value="__('Fecha de pago')" />
                             <input type="date" id="payment_date" name="payment_date" class="block mt-1 w-full"

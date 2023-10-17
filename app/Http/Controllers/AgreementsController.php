@@ -54,10 +54,10 @@ class AgreementsController extends Controller
     public function edit(Agreements $agreements)
     {
 
-        $clients = Clients::all();
+        // $clients = Clients::all();
 
 
-        return view('adminhtml.agreements.edit', compact('clients', 'agreements'));
+        return view('adminhtml.agreements.edit', compact('agreements'));
     }
 
     public function update(Request $request, Agreements $agreements)

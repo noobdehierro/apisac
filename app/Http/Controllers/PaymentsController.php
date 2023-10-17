@@ -60,6 +60,6 @@ class PaymentsController extends Controller
     public function destroy(Payments $payments)
     {
         $payments->delete();
-        return redirect()->route('debts.index')->with('success', 'Client deleted successfully');
+        return redirect()->route('payments.index')->with('success', 'Client deleted successfully');
     }
 }
