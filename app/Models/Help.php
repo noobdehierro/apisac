@@ -10,15 +10,15 @@ class Help extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id',
+        'debtor_id',
         'cel',
         'telephone',
         'email',
         'telephoneContact',
     ];
 
-    public function client()
+    public function debtor()
     {
-        return $this->belongsTo(Clients::class);
+        return $this->belongsTo(Debtor::class);
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('maps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('debtor_id');
             $table->boolean('help')->nullable();
             $table->boolean('clarification')->nullable();
             $table->boolean('imNot')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('Installments')->nullable();
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
         });
     }
 

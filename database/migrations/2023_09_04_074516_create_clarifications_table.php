@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('clarifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
-            $table->string('cel');
-            $table->string('telephone');
-            $table->string('email');
-            $table->string('image');
+            $table->unsignedBigInteger('debtor_id');
+            $table->string('cel')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('clarification');
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
         });
     }
 

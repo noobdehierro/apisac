@@ -65,14 +65,14 @@
                             <x-input-error :messages="$errors->get('payment_bank')" class="mt-2" />
                         </div>
 
+
                         <div>
                             <x-input-label for="next_payment_date" :value="__('Proximo pago')" />
+                            <input type="date" id="next_payment_date" name="next_payment_date"
+                                class="block mt-1 w-full" class="form-control"
+                                value="{{ old('next_payment_date', $debts->next_payment_date ?? '') }}">
 
-                            <input type="date" name="next_payment_date" id="next_payment_date"
-                                class="block mt-1 w-full" :value="old('next_payment_date')" autofocus
-                                autocomplete="next_payment_date" />
                             <x-input-error :messages="$errors->get('next_payment_date')" class="mt-2" />
-
                         </div>
 
                         <div>

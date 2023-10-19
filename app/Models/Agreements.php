@@ -10,7 +10,7 @@ class Agreements extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id',
+        'debtor_id',
         'status',
         'agreement_type',
         'number_installments',
@@ -19,8 +19,8 @@ class Agreements extends Model
         'created_at',
     ];
 
-    public function client()
+    public function debtor()
     {
-        return $this->belongsTo(Clients::class);
+        return $this->belongsTo(Debtor::class);
     }
 }

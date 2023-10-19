@@ -14,14 +14,14 @@
                         @csrf
 
                         <div>
-                            <x-input-label for="debt_id" :value="__('Deuda')" />
-                            <select name="debt_id" id="debt_id" class="block mt-1 w-full">
+                            <x-input-label for="debtor_id" :value="__('Deuda')" />
+                            <select name="debtor_id" id="debtor_id" class="block mt-1 w-full">
                                 <option value="">Seleccione el cliente deudor</option>
                                 @foreach ($dataDebts as $dataDebt)
-                                    <option value="{{ $dataDebt->debt_id }}">{{ $dataDebt->client_name }}</option>
+                                    <option value="{{ $dataDebt->id }}">{{ $dataDebt->full_name }}</option>
                                 @endforeach
                             </select>
-                            <x-input-error :messages="$errors->get('debt_id')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('debtor_id')" class="mt-2" />
                         </div>
 
                         <div>
@@ -36,6 +36,17 @@
                             <x-text-input id="paid_amount" class="block mt-1 w-full" type="text" name="paid_amount"
                                 :value="old('paid_amount')" autofocus autocomplete="paid_amount" />
                             <x-input-error :messages="$errors->get('paid_amount')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="status" :value="__('Estado')" />
+                            <select name="status" class="block mt-1 w-full">
+                                <option value="">Seleccione un estado</option>
+                                <option value="pagado" selected>Pagado</option>
+                                <option value="pendiente">Pendiente</option>
+                            </select>
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+
                         </div>
 
 

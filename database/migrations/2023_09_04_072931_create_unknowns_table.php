@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('unknowns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('debtor_id');
             $table->string('response');
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('debtor_id')->references('id')->on('debtors')->onDelete('cascade');
         });
     }
 

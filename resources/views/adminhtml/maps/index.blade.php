@@ -2,12 +2,9 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Acuerdos') }}
+                {{ __('mapa') }}
             </h2>
-            <a href="{{ route('agreements.create') }}"
-                class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                Crear nuevo acuerdo
-            </a>
+
         </div>
     </x-slot>
 
@@ -23,70 +20,75 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Cliente
+                                        debtor_id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Status
+                                        help
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Tipo de acuerdo
+                                        clarification
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        Numero de cuotas
+                                        imNot
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Unidad de Tiempo
+                                        interested
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Monto por cuota
+                                        exhibition
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Acciones
+                                        Installments
                                     </th>
+
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @if ($agreements->count() > 0)
-                                    @foreach ($agreements as $agreement)
+                                @if ($maps->count() > 0)
+                                    @foreach ($maps as $map)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->debtor->full_name }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->status }}
+                                                {{ $map->debtor->full_name }}
                                             </th>
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->agreement_type }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->number_installments }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->unit_time }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $agreement->amount_per_installment }}
+                                                {{ $map->help == 1 ? 'Entro' : 'No' }}
                                             </th>
 
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $map->clarification == 1 ? 'Entro' : 'No' }}
+                                            </th>
 
-                                            <td class="px-6 py-4">
-                                                <a href="{{ route('agreements.edit', $agreement->id) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
-                                            </td>
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $map->imNot == 1 ? 'Entro' : 'No' }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $map->interested == 1 ? 'Entro' : 'No' }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $map->exhibition == 1 ? 'Entro' : 'No' }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $map->Installments == 1 ? 'Entro' : 'No' }}
+                                            </th>
 
                                         </tr>
                                     @endforeach
-
                                 @endif
+
+
                             </tbody>
                         </table>
                     </div>

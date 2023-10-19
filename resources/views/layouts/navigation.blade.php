@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-1xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -11,32 +11,52 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
-                        {{ __('Clientes') }}
+
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('debtors.index')" :active="request()->routeIs('debtors.index')">
+                        {{ __('Cliente deudor') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('debts.index')" :active="request()->routeIs('debts.index')">
-                        {{ __('Deudas') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('payments.index')" :active="request()->routeIs('payments.index')">
                         {{ __('Pagos') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('agreements.index')" :active="request()->routeIs('agreements.index')">
                         {{ __('Contratos') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('maps.index')" :active="request()->routeIs('maps.index')">
+                        {{ __('Mapa') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('clarification.index')" :active="request()->routeIs('clarification.index')">
+                        {{ __('Declaraciones') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('helps.index')" :active="request()->routeIs('helps.index')">
+                        {{ __('Ayuda') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('unknowns.index')" :active="request()->routeIs('unknowns.index')">
+                        {{ __('No lo conozco') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
 
@@ -100,18 +120,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
-                {{ __('Clientes') }}
-            </x-responsive-nav-link>
-            {{-- <x-responsive-nav-link :href="route('debts.index')" :active="request()->routeIs('debts.index')">
-                {{ __('Deudas') }}
+            <x-responsive-nav-link :href="route('debtors.index')" :active="request()->routeIs('debtors.index')">
+                {{ __('Cliente deudor') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('payments.index')" :active="request()->routeIs('payments.index')">
                 {{ __('Pagos') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('agreements.index')" :active="request()->routeIs('agreements.index')">
                 {{ __('Contratos') }}
-            </x-responsive-nav-link> --}}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('maps.index')" :active="request()->routeIs('maps.index')">
+                {{ __('Mapa') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('clarification.index')" :active="request()->routeIs('clarification.index')">
+                {{ __('Declaraciones') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('helps.index')" :active="request()->routeIs('helps.index')">
+                {{ __('Ayuda') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('unknowns.index')" :active="request()->routeIs('unknowns.index')">
+                {{ __('No lo conozco') }}
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->

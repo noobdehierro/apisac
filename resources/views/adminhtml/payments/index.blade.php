@@ -28,10 +28,17 @@
                                         Nombre del cliente
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        numero de pago
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Fecha de pago
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Monto pagado
+                                        Monto a pagar
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        Estatus
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
@@ -46,11 +53,16 @@
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $payment->debt_id }}
+                                                {{ $payment->debtor_id }}
                                             </th>
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $payment->debt->client->name }}
+                                                {{ $payment->debtor->full_name }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $payment->quota_number }}
                                             </th>
 
                                             <th scope="row"
@@ -61,6 +73,11 @@
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $payment->paid_amount }}
+                                            </th>
+
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $payment->status }}
                                             </th>
 
 

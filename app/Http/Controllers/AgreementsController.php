@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agreements;
 use App\Models\Clients;
+use App\Models\Debtor;
 use App\Models\Debts;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,16 @@ class AgreementsController extends Controller
     public function create()
     {
 
-        $agreementClientIds = Agreements::pluck('client_id');
+        $agreementClientIds = Agreements::pluck('debtor_id');
 
-        $clients = Clients::whereNotIn('id', $agreementClientIds)->get();
+        // dd($agreementClientIds);
 
-        return view('adminhtml.agreements.create', compact('clients'));
+        // $clients = Clients::whereNotIn('id', $agreementClientIds)->get();
+        $debtors = Debtor::whereNotIn('id', $agreementClientIds)->get();
+
+        // dd($debtors);
+
+        return view('adminhtml.agreements.create', compact('debtors'));
     }
 
     public function store(Request $request)
@@ -31,7 +37,7 @@ class AgreementsController extends Controller
 
 
         $request->validate([
-            'client_id' => 'required:exists:clients,id',
+            'debtor_id' => 'required:exists:debtors,id',
             'status' => 'required',
             'agreement_type' => 'required',
             'number_installments' => 'nullable',
@@ -48,10 +54,10 @@ class AgreementsController extends Controller
     public function edit(Agreements $agreements)
     {
 
-        $clients = Clients::all();
+        // $clients = Clients::all();
 
 
-        return view('adminhtml.agreements.edit', compact('clients', 'agreements'));
+        return view('adminhtml.agreements.edit', compact('agreements'));
     }
 
     public function update(Request $request, Agreements $agreements)
