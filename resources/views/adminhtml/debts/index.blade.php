@@ -100,6 +100,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $debts->links() }}
 
 
                 </div>

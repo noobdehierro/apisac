@@ -79,6 +79,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $helps->links() }}
 
 
                 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\HelpController;
 use App\Http\Controllers\MapsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecuperationController;
 use App\Http\Controllers\UnknownsController;
 use App\Models\Clarification;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/helps', [HelpController::class, 'index'])->name('helps.index');
 
     Route::get('/unknowns', [UnknownsController::class, 'index'])->name('unknowns.index');
+
+    Route::get('/recuperations', [RecuperationController::class, 'index'])->name('recuperations.index');
+    Route::get('/recuperations/{recuperation}/edit', [RecuperationController::class, 'edit'])->name('recuperations.edit');
+    Route::put('/recuperations/{recuperation}', [RecuperationController::class, 'update'])->name('recuperations.update');
+    Route::delete('/recuperations/{recuperation}', [RecuperationController::class, 'destroy'])->name('recuperations.destroy');
 });
 
 require __DIR__ . '/auth.php';

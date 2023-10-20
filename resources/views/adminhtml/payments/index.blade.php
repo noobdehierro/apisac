@@ -93,6 +93,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $payments->links() }}
 
 
                 </div>

@@ -48,6 +48,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $unknowns->links() }}
 
 
                 </div>
