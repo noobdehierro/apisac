@@ -280,79 +280,6 @@ class ClientsController extends Controller
         ]);
     }
 
-    // public function checkagreements(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'debtor_id' => 'required',
-    //         'number_installments' => 'required',
-    //         'unit_time' => 'required',
-    //         'amount_per_installment' => 'required',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json(['error' => $validator->errors()], 400);
-    //     }
-
-    //     $debtor_id = $request->input('debtor_id');
-    //     $number_installments = $request->input('number_installments');
-    //     $unit_time = $request->input('unit_time');
-    //     $amount_per_installment = $request->input('amount_per_installment');
-
-    //     // $client = Clients::where('id', $client_id)->first();
-    //     $debtor = Debtor::where('id', $debtor_id)->first();
-
-    //     if (!$debtor) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Client not found',
-    //             'data' => []
-    //         ], 404);
-    //     }
-
-    //     // $agreement = Agreements::where('client_id', $client_id)->first();
-    //     $agreement = Agreements::where('debtor_id', $debtor_id)->first();
-
-    //     if ($agreement) {
-
-    //         $agreement->update([
-    //             'number_installments' => $number_installments,
-    //             'unit_time' => $unit_time,
-    //             'amount_per_installment' => $amount_per_installment
-    //         ]);
-
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'message' => 'Contrato actualizado',
-    //             'data' => $agreement
-
-    //         ]);
-    //     }
-
-
-
-    //     try {
-    //         $data = Agreements::create([
-    //             'client_id' => $client_id,
-    //             'status' => 'pendiente',
-    //             'agreement_type' => 'contado',
-    //             'number_installments' => $number_installments,
-    //             'unit_time' => $unit_time,
-    //             'amount_per_installment' => $amount_per_installment
-    //         ]);
-
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'message' => 'Contrato creado',
-    //             'data' => $data
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => $th->getMessage(),
-    //             'data' => []
-    //         ], 500);
-    //     }
-    // }
 
     public function pdf(Request $request, $access_code)
     {
@@ -379,10 +306,38 @@ class ClientsController extends Controller
 
         $debtor->save();
 
-        $fecha = Carbon::now();
-
+        $fecha = now();
         $dia = $fecha->format('d');
-        $mes = $fecha->format('m');
+        $mesIngles = __($fecha->format('F'));
+
+        $mes = null;
+
+        if ($mesIngles == 'January') {
+            $mes = 'enero';
+        } else if ($mesIngles == 'February') {
+            $mes = 'febrero';
+        } else if ($mesIngles == 'March') {
+            $mes = 'marzo';
+        } else if ($mesIngles == 'April') {
+            $mes = 'abril';
+        } else if ($mesIngles == 'May') {
+            $mes = 'mayo';
+        } else if ($mesIngles == 'June') {
+            $mes = 'junio';
+        } else if ($mesIngles == 'July') {
+            $mes = 'julio';
+        } else if ($mesIngles == 'August') {
+            $mes = 'agosto';
+        } else if ($mesIngles == 'September') {
+            $mes = 'septiembre';
+        } else if ($mesIngles == 'October') {
+            $mes = 'octubre';
+        } else if ($mesIngles == 'November') {
+            $mes = 'noviembre';
+        } else if ($mesIngles == 'December') {
+            $mes = 'diciembre';
+        }
+
         $ano = $fecha->format('Y');
 
         $name = $debtor->full_name;
@@ -400,16 +355,18 @@ class ClientsController extends Controller
         $agreement = $debtor->agreement;
         $interbank_key = $debtor->interbank_key;
 
+        // dd($sce, $minimum_to_collect,$deudaConDescuento, $portfolio, $deudaLetter, $credit_number, $payment_bank, $payment_reference, $agreement, $interbank_key);
+
         $pdf = Pdf::loadView('pdf.pdf', [
             'dia' => $dia,
             'mes' => $mes,
             'ano' => $ano,
             'name' => $name,
-            'deuda' => $deudaConDescuento,
+            'deuda' => number_format($deudaConDescuento, 2, '.', ','),
             'portfolio' => $portfolio,
             'deudaLetter' => $deudaLetter,
             'credit_number' => $credit_number,
-            'sce' => $sce,
+            'sce' => number_format($sce, 2, '.', ','),
             'minimum_to_collect' => $minimum_to_collect,
             'date' => $fechaConvertida,
             'payment_bank' => $payment_bank,
@@ -495,11 +452,40 @@ class ClientsController extends Controller
             ], 404);
         }
 
-        $fecha = Carbon::now();
-
+        $fecha = now();
         $dia = $fecha->format('d');
-        $mes = $fecha->format('m');
+        $mesIngles = __($fecha->format('F'));
+
+        $mes = null;
+
+        if ($mesIngles == 'January') {
+            $mes = 'enero';
+        } else if ($mesIngles == 'February') {
+            $mes = 'febrero';
+        } else if ($mesIngles == 'March') {
+            $mes = 'marzo';
+        } else if ($mesIngles == 'April') {
+            $mes = 'abril';
+        } else if ($mesIngles == 'May') {
+            $mes = 'mayo';
+        } else if ($mesIngles == 'June') {
+            $mes = 'junio';
+        } else if ($mesIngles == 'July') {
+            $mes = 'julio';
+        } else if ($mesIngles == 'August') {
+            $mes = 'agosto';
+        } else if ($mesIngles == 'September') {
+            $mes = 'septiembre';
+        } else if ($mesIngles == 'October') {
+            $mes = 'octubre';
+        } else if ($mesIngles == 'November') {
+            $mes = 'noviembre';
+        } else if ($mesIngles == 'December') {
+            $mes = 'diciembre';
+        }
+
         $ano = $fecha->format('Y');
+
         $name = $debtor->full_name;
         $payments = Payments::where('debtor_id', $debtor->id)->get();
 
@@ -547,6 +533,15 @@ class ClientsController extends Controller
 
         // dd($deudaConPlazos, $deudaConPlazosLetter);
 
+        foreach ($payments as $key => $payment) {
+            $payments[$key]->paid_amount = number_format($payment->paid_amount, 2, '.', ',');
+        }
+
+
+
+        // dd($payments);
+
+
 
         $pdf = Pdf::loadView('pdf.pdfplazos', [
             'dia' => $dia,
@@ -555,13 +550,13 @@ class ClientsController extends Controller
             'name' => $name,
             'portfolio' => $portfolio,
             'credit_number' => $credit_number,
-            'sce' => $sce,
+            'sce' => number_format($sce, 2, '.', ','),
             'minimum_to_collect' => $minimum_to_collect,
             'payments' => $payments,
             'payment_bank' => $payment_bank,
             'payment_reference' => $payment_reference,
             'agreement' => $agreement,
-            'deudaConPlazos' => $deudaConPlazos,
+            'deudaConPlazos' => number_format($deudaConPlazos, 2, '.', ','),
             'deudaConPlazosLetter' => $deudaConPlazosLetter,
             'interbank_key' => $debtor->interbank_key
         ]);
@@ -664,6 +659,7 @@ class ClientsController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Contrato creado',
+                'data' => $request->all()
             ]);
         } catch (\Throwable $th) {
 
@@ -697,11 +693,14 @@ class ClientsController extends Controller
         // $thirteenToEighteen = 15778.50;
         // $nineteenToTwentyFour = 17671.92;
 
-        $oneToThree = $debtor->one_three_months;
-        $fourToSix = $debtor->four_six_months;
-        $sevenToTwelve = $debtor->seven_twelve_months;
-        $thirteenToEighteen = $debtor->thirteen_eighteen_months;
-        $nineteenToTwentyFour = $debtor->nineteen_twentyfour_months;
+        $oneToThree = round($debtor->one_three_months);
+        $fourToSix = round($debtor->four_six_months);
+        $sevenToTwelve = round($debtor->seven_twelve_months);
+        $thirteenToEighteen = round($debtor->thirteen_eighteen_months);
+        $nineteenToTwentyFour = round($debtor->nineteen_twentyfour_months);
+
+        // dd($oneToThree, $fourToSix, $sevenToTwelve, $thirteenToEighteen, $nineteenToTwentyFour, $debtor);
+
 
         $fases = [
             "primera fase" => [
@@ -737,13 +736,13 @@ class ClientsController extends Controller
 
                 if ($tipoCuonta == "semanal") {
                     $valorSemanal = $faseData["meses"] / $numeroSemanas;
-                    array_push($rangos[$fase], $valorSemanal);
+                    array_push($rangos[$fase], round($valorSemanal));
                 } else if ($tipoCuonta == "quincenal") {
                     $valorQuincenal = $faseData["meses"] / ($numeroSemanas / 2);
-                    array_push($rangos[$fase], $valorQuincenal);
+                    array_push($rangos[$fase], round($valorQuincenal));
                 } else if ($tipoCuonta == "mensual") {
                     $valorMensual = $faseData["meses"] / ($i);
-                    array_push($rangos[$fase], $valorMensual);
+                    array_push($rangos[$fase], round($valorMensual));
                 }
             }
         }
@@ -778,7 +777,9 @@ class ClientsController extends Controller
 
         $buscarPago = $valor_mas_cercano ? $valor_mas_cercano * $numeroCuotas : $ultimo_valor * $numeroCuotas;
 
-        $deudaPago = self::encontrarNumeroMasCercano($buscarPago, [$oneToThree, $fourToSix, $sevenToTwelve, $thirteenToEighteen, $nineteenToTwentyFour]);
+        // $deudaPago = self::encontrarNumeroMasCercano($buscarPago, [$oneToThree, $fourToSix, $sevenToTwelve, $thirteenToEighteen, $nineteenToTwentyFour]);
+
+        $deudaPago = $buscarPago;
 
         $pagoPorCuota = $valor_mas_cercano ?? $ultimo_valor;
 
@@ -794,7 +795,8 @@ class ClientsController extends Controller
                 'ultimo_valor' => $ultimo_valor,
                 'message' => $pagoPorCuota == $ultimo_valor,
                 'tipoCuonta' => $tipoCuontaUpdate
-            ]
+            ],
+
         ]);
     }
 
