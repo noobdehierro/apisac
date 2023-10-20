@@ -9,7 +9,7 @@ class ClarificationController extends Controller
 {
     public function index()
     {
-        $clarifications = Clarification::paginate(10);
+        $clarifications = Clarification::paginate(15);
 
         return view('adminhtml.clarifications.index', compact('clarifications'));
     }

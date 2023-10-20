@@ -117,6 +117,9 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $debtors->links() }}
+
+
                 </div>
             </div>
         </div>

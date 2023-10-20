@@ -12,7 +12,10 @@ use Illuminate\Http\Request;
 use App\Models\Clarification;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Mail\RecoverPassword;
 use App\Models\Debtor;
+use App\Models\Recuperation;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
@@ -810,5 +813,90 @@ class ClientsController extends Controller
         }
 
         return $numeroMasCercano;
+    }
+
+    public function recoverPassword(Request $request)
+    {
+
+
+
+
+        $validator = Validator::make($request->all(), [
+            'type' => 'required',
+            'data' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $type = $request->type;
+        $data = $request->data;
+
+        $debtor = null;
+
+        if ($type == 'cel') {
+            $debtor = Debtor::where('phone', $data)->first();
+        } else if ($type == 'email') {
+            $debtor = Debtor::where('email', $data)->first();
+        }
+
+        if (!$debtor) {
+
+            Recuperation::create([
+                'type' => $type,
+                'data' => $data,
+                'status' => 'desconocido',
+            ]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No se encontro el usuario, pronto un administrador lo contactara',
+            ], 404);
+        }
+
+        if ($type == 'cel') {
+
+            if ($debtor->email) {
+                Mail::to($debtor->email)->send(new RecoverPassword($debtor));
+                Recuperation::create([
+                    'debtor_id' => $debtor->id,
+                    'type' => $type,
+                    'data' => $data,
+                    'status' => 'enviado',
+                ]);
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Se ha enviado un correo de recuperación',
+                ], 200);
+            } else {
+                Recuperation::create([
+                    'debtor_id' => $debtor->id,
+                    'type' => $type,
+                    'data' => $data,
+                    'status' => 'pendiente',
+                ]);
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'pronto un administrador lo contactara',
+                ], 200);
+            }
+        } else if ($type == 'email') {
+            Mail::to($debtor->email)->send(new RecoverPassword($debtor));
+
+            Recuperation::create([
+                'debtor_id' => $debtor->id,
+                'type' => $type,
+                'data' => $data,
+                'status' => 'enviado',
+            ], 200);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Se ha enviado un correo de recuperación',
+            ], 200);
+        }
     }
 }

@@ -10,7 +10,7 @@ class UnknownsController extends Controller
     public function index()
     {
 
-        $unknowns = Unknowns::paginate(10);
+        $unknowns = Unknowns::paginate(15);
 
         return view('adminhtml.unknowns.index', compact('unknowns'));
     }

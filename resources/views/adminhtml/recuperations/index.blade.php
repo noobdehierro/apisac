@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('mapa') }}
+                {{ __('Recuperaciones') }}
             </h2>
 
         </div>
@@ -13,7 +13,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
@@ -23,78 +22,49 @@
                                         debtor_id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        help
+                                        type
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        clarification
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3">
-                                        imNot
+                                        status
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        interested
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        exhibition
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Installments
+                                        action
                                     </th>
 
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @if ($maps->count() > 0)
-                                    @foreach ($maps as $map)
+                                @if ($recuperations->count() > 0)
+                                    @foreach ($recuperations as $recuperation)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->debtor->full_name }}
+                                                {{ $recuperation->debtor->full_name ?? '' }}
                                             </th>
-
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->help == 1 ? 'Entro' : 'No' }}
+                                                {{ $recuperation->type }}
                                             </th>
-
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->clarification == 1 ? 'Entro' : 'No' }}
+                                                {{ $recuperation->status }}
                                             </th>
 
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->imNot == 1 ? 'Entro' : 'No' }}
+                                            <th class="px-6 py-4">
+                                                <a href="{{ route('recuperations.edit', $recuperation->id) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
                                             </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->interested == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->exhibition == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->Installments == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
                                         </tr>
                                     @endforeach
                                 @endif
 
-
                             </tbody>
                         </table>
                     </div>
-                    {{ $maps->links() }}
+                    {{ $recuperations->links() }}
 
-
+                    
                 </div>
             </div>
         </div>

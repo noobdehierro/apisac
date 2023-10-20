@@ -93,7 +93,7 @@
                         </div>
 
                         <div>
-                            <x-input-label for="minimum_to_collect" :value="__('Monto minimo a cobrar')" />
+                            <x-input-label for="minimum_to_collect" :value="__('Monto a cobrar')" />
                             <x-text-input id="minimum_to_collect" class="block mt-1 w-full" type="text"
                                 name="minimum_to_collect" :value="old('minimum_to_collect', $debtor->minimum_to_collect)" />
                             <x-input-error :messages="$errors->get('minimum_to_collect')" class="mt-2" />
