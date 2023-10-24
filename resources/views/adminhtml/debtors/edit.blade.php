@@ -62,7 +62,7 @@
                                 <option value="activo" @if ($debtor->status == 'activo') selected @endif>Activo</option>
                                 {{-- <option value="pendiente" @if ($debtor->status == 'pendiente') selected @endif>Pendiente
                                 </option> --}}
-                                <option value="pagando" @if ($debtor->status == 'pagando') selected @endif>Pagando
+                                <option value="convenio" @if ($debtor->status == 'convenio') selected @endif>Convenio
                                 </option>
 
                             </select>

@@ -47,7 +47,7 @@ class ClientsController extends Controller
             ], 404);
         }
 
-        if ($debtors->status != 'pagando') {
+        if ($debtors->status != 'convenio') {
             $debtors->update([
                 'status' => 'activo'
             ]);
@@ -407,7 +407,7 @@ class ClientsController extends Controller
             ]);
 
             $debtor->update([
-                "status" => "pagando",
+                "status" => "convenio",
                 "nextPayday" => $date_pay,
                 "remainingDebt" => $debtor->cash
             ]);
@@ -605,11 +605,11 @@ class ClientsController extends Controller
 
 
         // $client->update([
-        //     'status' => 'pagando'
+        //     'status' => 'convenio'
         // ]);
 
         $debtor->update([
-            'status' => 'pagando',
+            'status' => 'convenio',
             'remainingDebt' => $deudaFinal,
             "nextPayday" => Carbon::now()->addDays(1)
         ]);

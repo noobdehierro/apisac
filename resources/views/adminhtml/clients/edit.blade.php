@@ -46,7 +46,7 @@
                                 <option value="">Seleccione un estado</option>
                                 <option value="inactivo">Inactivo</option>
                                 <option value="activo">Activo</option>
-                                <option value="pagando">Pagando</option>
+                                <option value="convenio">Convenio</option>
                             </select>
                             <x-input-error class="mt-2" :messages="$errors->get('status')" />
                         </div>
