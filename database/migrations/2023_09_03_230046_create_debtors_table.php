@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->float('remainingDebt')->nullable();
             $table->date('nextPayday')->nullable();
-            $table->float('capital')->nullable();
             $table->float('sce')->nullable();
             $table->string('minimum_to_collect')->nullable();
             $table->float('cash')->nullable();
@@ -39,6 +38,7 @@ return new class extends Migration
             $table->string('payment_reference')->nullable();
             $table->string('agreement')->nullable();
             $table->string('payment_bank')->nullable();
+            $table->string('payment_bank_full_name')->nullable();
             $table->string('interbank_key')->nullable();
             $table->string('product')->nullable();
             $table->string('phone')->nullable();

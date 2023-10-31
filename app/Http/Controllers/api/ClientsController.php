@@ -351,6 +351,7 @@ class ClientsController extends Controller
         $credit_number = $debtor->credit_number;
 
         $payment_bank = $debtor->payment_bank;
+        $payment_bank_full_name = $debtor->payment_bank_full_name;
         $payment_reference = $debtor->payment_reference;
         $agreement = $debtor->agreement;
         $interbank_key = $debtor->interbank_key;
@@ -370,6 +371,7 @@ class ClientsController extends Controller
             'minimum_to_collect' => $minimum_to_collect,
             'date' => $fechaConvertida,
             'payment_bank' => $payment_bank,
+            'payment_bank_full_name' => $payment_bank_full_name,
             'payment_reference' => $payment_reference,
             'agreement' => $agreement,
             'interbank_key' => $interbank_key
@@ -498,6 +500,7 @@ class ClientsController extends Controller
         $credit_number = $debtor->credit_number;
 
         $payment_bank = $debtor->payment_bank;
+        $payment_bank_full_name = $debtor->payment_bank_full_name;
         $payment_reference = $debtor->payment_reference;
         $agreement = $debtor->agreement;
         $remainingDebt = $debtor->remainingDebt;
@@ -554,6 +557,7 @@ class ClientsController extends Controller
             'minimum_to_collect' => $minimum_to_collect,
             'payments' => $payments,
             'payment_bank' => $payment_bank,
+            'payment_bank_full_name' => $payment_bank_full_name,
             'payment_reference' => $payment_reference,
             'agreement' => $agreement,
             'deudaConPlazos' => number_format($deudaConPlazos, 2, '.', ','),

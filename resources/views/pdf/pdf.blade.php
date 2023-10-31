@@ -78,7 +78,7 @@
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
-                EMITIDO POR {{ $portfolio }} INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA
+                EMITIDO POR {{ $portfolio }} Y POR LA
                 OTRA
                 PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR
                 DE LAS
@@ -92,7 +92,7 @@
                 CANTIDAD DE
                 ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
                 CRÉDITO NO.
-                {{ $credit_number }} EMITIDO POR {{ $portfolio }} S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
+                {{ $credit_number }} EMITIDO POR {{ $portfolio }}.
             </P>
 
             <h3>CLAUSULA SEGUNDA</h3>
