@@ -19,16 +19,16 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        debtor_id
+                                        Cliente deudor
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        type
+                                        Tipo
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        status
+                                        Estatus
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        action
+                                        Acción
                                     </th>
 
                                 </tr>
@@ -64,7 +64,7 @@
                     </div>
                     {{ $recuperations->links() }}
 
-                    
+
                 </div>
             </div>
         </div>

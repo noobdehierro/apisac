@@ -20,26 +20,24 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        debtor_id
+                                        Cliente deudor
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        help
+                                        Ayuda
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        clarification
+                                        aclaración
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        imNot
+                                        No soy yo
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3">
+                                        Sola exhibición
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        interested
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        exhibition
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Installments
+                                        Cuotas
                                     </th>
 
                                 </tr>
@@ -67,11 +65,6 @@
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $map->imNot == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->interested == 1 ? 'Entro' : 'No' }}
                                             </th>
 
                                             <th scope="row"
