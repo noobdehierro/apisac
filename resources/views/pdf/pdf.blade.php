@@ -62,7 +62,7 @@
     <div>
 
         <div>
-            <img src="{{ asset('images/logo.png') }}" alt="logo">
+            <img src="{{ asset('images/logo.png') }}" alt="logo" width="200px">
         </div>
         <div>
             <div class="fecha">
