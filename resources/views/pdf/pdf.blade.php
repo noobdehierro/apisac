@@ -77,7 +77,7 @@
         <div>
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
-                PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
+                PAGO, QUE CELEBRAN POR UNA PARTE Soluciones Administrativas, S.A.P.I. DE C.V., COMO ACREEDOR DEL CRÉDITO
                 EMITIDO POR {{ $portfolio }} Y POR LA
                 OTRA
                 PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR
@@ -87,8 +87,9 @@
             <h2>CLAUSULAS</h2>
             <H3>CLAUSULA PRIMERA</H3>
 
-            <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> IBKAN CAPITAL, S.A.P.I. DE
-                C.V., (“IBKAN”), <span class="red">POR</span> LA
+            <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> Soluciones Administrativas,
+                S.A.P.I. DE
+                C.V., <span class="red">POR</span> LA
                 CANTIDAD DE
                 ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
                 CRÉDITO NO.
@@ -127,8 +128,9 @@
 
             <h3>CLAUSULA TERCERA</h3>
 
-            <p class="parrafo">LOS PAGOS DEBERÁN REALIZARSE A LA CUENTA CONCENTRADORA DE IBKAN CAPITAL, S.A.P.I. DE
-                C.V., (“IBKAN”)
+            <p class="parrafo">LOS PAGOS DEBERÁN REALIZARSE A LA CUENTA CONCENTRADORA DE Soluciones Administrativas,
+                S.A.P.I. DE
+                C.V.
                 CUYOS DATOS BANCARIOS SON LOS SIGUIENTES:
             </p>
             <p class="parrafo">PAGO EN VENTANILLA/PRACTICAJA</p>
@@ -177,7 +179,7 @@
 
             <p class="parrafo">UNA VEZ QUE EL TITULAR REALICE EL PAGO TOTAL DE LA DEUDA ESPECIFICADA EN LA SEGUNDA
                 CLAUSULA DEL
-                PRESENTE, IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) SE COMPROMETE A ENTREGAR LA CARTA FINIQUITO
+                PRESENTE, Soluciones Administrativas, S.A.P.I. DE C.V. SE COMPROMETE A ENTREGAR LA CARTA FINIQUITO
                 CORRESPONDIENTE A LA LIQUIDACIÓN DEL CRÉDITO ANTES MENCIONADO EN UN PERIODO NO MAYOR A 30 DÍAS HÁBILES A
                 PARTIR DE LA CONFIRMACIÓN DE LIQUIDACIÓN Y APLICACIÓN DE PAGO.</p>
 
@@ -185,12 +187,13 @@
 
             <p class="parrafo">SE REALIZARÁ ACTUALIZACIÓN DE LA INFORMACIÓN CREDITICIA ANTE BURO NACIONAL DE CRÉDITO, EN
                 EL REGISTRO
-                CORRESPONDIENTE A IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) CON LA CLAVE DE OBSERVACIÓN MOP01 QUE
+                CORRESPONDIENTE A Soluciones Administrativas, S.A.P.I. DE C.V. CON LA CLAVE DE OBSERVACIÓN MOP01 QUE
                 SIGNIFICA PAGO PUNTUAL Y ADECUADO.</p>
 
             <h3>CLAUSULA SEPTIMA</h3>
 
-            <p class="parrafo">UNA VEZ QUE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) SE DÉ POR INFORMADO SOBRE EL PAGO
+            <p class="parrafo">UNA VEZ QUE Soluciones Administrativas, S.A.P.I. DE C.V. SE DÉ POR INFORMADO SOBRE EL
+                PAGO
                 TOTAL DEL
                 PRESENTE CONVENIO, EN CASO DE QUE LAS PARTES ANTES MENCIONADAS LLEVEN EL TRAMITE DE LIQUIDACIÓN MEDIANTE
                 UN JUZGADO COMPETENTE, GIRARÁ INSTRUCCIÓN AL ÁREA JURÍDICA</p>
@@ -199,7 +202,7 @@
 
             <p>ANTE EL INCUMPLIMIENTO Y FALTA DE REPORTE DEL PAGO PARA LA LIQUIDACIÓN DEL CRÉDITO OFRECIDO POR PARTE DEL
                 TITULAR, SE ENTENDERÁ RESCINDIDO EL PRESENTE CONVENIO, SUJETÁNDOSE A LA JURISDICCIÓN DE LOS JUZGADOS
-                CIVILES COMPETENTES, DEJANDO A SALVO LOS DERECHOS DE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) A
+                CIVILES COMPETENTES, DEJANDO A SALVO LOS DERECHOS DE Soluciones Administrativas, S.A.P.I. DE C.V. A
                 RECLAMAR EL TOTAL DE LA DEUDA.</p>
 
             <p>ENTERADAS LAS PARTES DEL CONTENIDO Y ALCANCE LEGAL DEL PRESENTE CONVENIO, DE ACUERDO CON LO ESTABLECIDO
@@ -214,7 +217,7 @@
         <div style="text-align: center">
             <h1>PATRICIA RAMOS C.</h1>
             <h2>AREA ADMINISTRATIVA</h2>
-            <p>IBKAN CAPITAL S.A.P.I. DE C.V.</p>
+            <p>Soluciones Administrativas S.A.P.I. DE C.V.</p>
 
         </div>
         <hr style="width: 50%; margin: 0 auto">

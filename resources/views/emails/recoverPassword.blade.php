@@ -1,25 +1,26 @@
 @component('mail::message')
-# Recuperación de Código de Acceso
+    # Recuperación de Código de Acceso
 
-Estimado/a **{{ $debtor->full_name }}**,
+    Estimado/a **{{ $debtor->full_name }}**,
 
-Es un placer ayudarte con la recuperación de tu código de acceso. A continuación, encontrarás tu nuevo código de acceso:
-
-
-**<center>{{ $debtor->access_code }}</center>**
+    Es un placer ayudarte con la recuperación de tu código de acceso. A continuación, encontrarás tu nuevo código de acceso:
 
 
-Te sugerimos guardar este correo electrónico en un lugar seguro.
+    **<center>{{ $debtor->access_code }}</center>**
 
-Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con nosotros de inmediato a través de los siguientes medios:
 
-- Correo Electrónico: [atencioncc@ibkan.com.mx](mailto:atencioncc@ibkan.com.mx)
-- Teléfono: [55 6270 0471](tel:5562700471)
-- WhatsApp: [56 3188 5034](https://wa.me/5631885034)
+    Te sugerimos guardar este correo electrónico en un lugar seguro.
 
-Agradecemos tu confianza.
+    Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con
+    nosotros de inmediato a través de los siguientes medios:
 
-<center>Atentamente</center>
+    - Correo Electrónico: [atencioncc@ibkan.com.mx](mailto:atencioncc@ibkan.com.mx)
+    - Teléfono: [55 6270 0471](tel:5562700471)
+    - WhatsApp: [56 3188 5034](https://wa.me/5631885034)
 
-**<center>IBKAN Capital</center>**
+    Agradecemos tu confianza.
+
+    <center>Atentamente</center>
+
+    **<center>Soluciones Administrativas</center>**
 @endcomponent
