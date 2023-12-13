@@ -14,7 +14,7 @@
     Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con
     nosotros de inmediato a través de los siguientes medios:
 
-    - Correo Electrónico: [atencioncc@ibkan.com.mx](mailto:atencioncc@ibkan.com.mx)
+    - Correo Electrónico: [atencioncc@adygcmex.mx](mailto:atencioncc@adygcmex.mx)
     - Teléfono: [55 6270 0471](tel:5562700471)
     - WhatsApp: [56 3188 5034](https://wa.me/5631885034)
 
