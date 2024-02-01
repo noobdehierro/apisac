@@ -46,6 +46,9 @@ return new class extends Migration
             $table->string('portfolio')->nullable();
             $table->string('phone_1')->nullable();
             $table->string('phone_2')->nullable();
+
+            $table->string('origin_bank')->nullable();
+
             $table->timestamps();
         });
     }
