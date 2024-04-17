@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Cliente deudor') }}
+                {{ __('Pagos') }}
             </h2>
-            <a href="{{ route('debtors.create') }}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                Agregar nuevo cliente deudor
+            <a href="{{ route('payments.create') }}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                Crear nueva pago
             </a>
         </div>
     </x-slot>
@@ -15,40 +15,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
+
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 with-larasort">
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
-                                        @sortableLink('full_name', 'Nombre')
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
-                                        @sortableLink('status', 'Estatus')
+                                    <th scope="col" class="px-6 py-3">
+                                        ID Deuda
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Codigo acceso
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
-                                        @sortableLink('sce', 'Deuda total')
+                                        Nombre del cliente
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Referencia pago
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
-                                        @sortableLink('origin_bank', 'Banco de origen')
+                                        numero de pago
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Clave interbancaria
+                                        Fecha de pago
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Monto a pagar
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        deuda restante
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3">
-                                        proximo pago
+                                        Estatus
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
@@ -58,67 +48,52 @@
                             </thead>
                             <tbody>
 
-                                @if ($debtors->count() > 0)
-                                    @foreach ($debtors as $debtor)
+                                @if ($payments->count() > 0)
+                                    @foreach ($payments as $payment)
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->full_name }}
+                                                {{ $payment->debtor_id }}
+                                            </th>
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $payment->debtor->full_name }}
                                             </th>
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->status }}
+                                                {{ $payment->quota_number }}
                                             </th>
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->access_code }}
+                                                {{ $payment->payment_date }}
                                             </th>
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->sce }}
+                                                {{ $payment->paid_amount }}
                                             </th>
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->payment_reference }}
+                                                {{ $payment->status }}
                                             </th>
 
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->origin_bank }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->interbank_key }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->remainingDebt }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->nextPayday }}
-                                            </th>
 
                                             <td class="px-6 py-4">
-                                                <a href="{{ route('debtors.edit', $debtor->id) }}"
+                                                <a href="{{ route('payments.edit', $payment->id) }}"
                                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
                                             </td>
 
                                         </tr>
                                     @endforeach
+
                                 @endif
                             </tbody>
                         </table>
                     </div>
-                    {{-- {{ $debtors->links() }} --}}
-                    {!! $debtors->appends(\Request::except('page'))->render() !!}
+                    {{ $payments->links() }}
 
 
                 </div>

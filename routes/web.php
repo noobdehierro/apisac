@@ -44,23 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::get('/clients', [ClientsController::class, 'index'])->name('clients.index');
-    // Route::get('/clients/Create', [ClientsController::class, 'create'])->name('clients.create');
-    // Route::post('/clients', [ClientsController::class, 'store'])->name('clients.store');
-    // Route::get('/clients/{client}/Edit', [ClientsController::class, 'edit'])->name('clients.edit');
-    // Route::put('/clients/{client}', [ClientsController::class, 'update'])->name('clients.update');
-    // Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->name('clients.destroy');
-
-    // Route::get('/debts', [DebtsController::class, 'index'])->name('debts.index');
-    // Route::get('/debts/Create', [DebtsController::class, 'create'])->name('debts.create');
-    // Route::post('/debts', [DebtsController::class, 'store'])->name('debts.store');
-    // Route::get('/debts/{debts}/Edit', [DebtsController::class, 'edit'])->name('debts.edit');
-    // Route::put('/debts/{debts}', [DebtsController::class, 'update'])->name('debts.update');
-    // Route::delete('/debts/{debts}', [DebtsController::class, 'destroy'])->name('debts.destroy');
-
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('/payments/Create', [PaymentsController::class, 'create'])->name('payments.create');
     Route::post('/payments', [PaymentsController::class, 'store'])->name('payments.store');
+    Route::get('/payments/{debtor}', [PaymentsController::class, 'show'])->name('payments.show');
     Route::get('/payments/{payments}/Edit', [PaymentsController::class, 'edit'])->name('payments.edit');
     Route::put('/payments/{payments}', [PaymentsController::class, 'update'])->name('payments.update');
     Route::delete('/payments/{payments}', [PaymentsController::class, 'destroy'])->name('payments.destroy');

@@ -17,7 +17,9 @@ class DashboardController extends Controller
     {
         $countDebtors = Debtor::count();
         $countAgreements = Agreements::count();
+        $credito = Agreements::where('agreement_type', 'credito')->count();
+        $contado = Agreements::where('agreement_type', 'contado')->count();
 
-        return view('adminhtml.dashboard', compact('countDebtors', 'countAgreements'));
+        return view('adminhtml.dashboard', compact('countDebtors', 'countAgreements', 'credito', 'contado'));
     }
 }

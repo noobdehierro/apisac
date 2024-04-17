@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SDamian\Larasort\AutoSortable;
 
 class Debtor extends Model
 {
     use HasFactory;
+    use AutoSortable;
+
+    private array $sortables = [
+        'full_name',
+        'status',
+        'sce',
+        'origin_bank',
+    ];
 
     protected $fillable = [
         'access_code',
