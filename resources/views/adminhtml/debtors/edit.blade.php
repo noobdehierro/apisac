@@ -62,7 +62,7 @@
                                 <option value="activo" @if ($debtor->status == 'activo') selected @endif>Activo</option>
                                 {{-- <option value="pendiente" @if ($debtor->status == 'pendiente') selected @endif>Pendiente
                                 </option> --}}
-                                <option value="pagando" @if ($debtor->status == 'pagando') selected @endif>Pagando
+                                <option value="convenio" @if ($debtor->status == 'convenio') selected @endif>Convenio
                                 </option>
 
                             </select>
@@ -78,12 +78,7 @@
                             <x-input-error :messages="$errors->get('nextPayday')" class="mt-2" />
                         </div>
 
-                        <div>
-                            <x-input-label for="capital" :value="__('Capital')" />
-                            <x-text-input id="capital" class="block mt-1 w-full" type="text" name="capital"
-                                :value="old('capital', $debtor->capital)" />
-                            <x-input-error :messages="$errors->get('capital')" class="mt-2" />
-                        </div>
+
 
                         <div>
                             <x-input-label for="sce" :value="__('SCE')" />
@@ -93,7 +88,7 @@
                         </div>
 
                         <div>
-                            <x-input-label for="minimum_to_collect" :value="__('Monto minimo a cobrar')" />
+                            <x-input-label for="minimum_to_collect" :value="__('Monto a cobrar')" />
                             <x-text-input id="minimum_to_collect" class="block mt-1 w-full" type="text"
                                 name="minimum_to_collect" :value="old('minimum_to_collect', $debtor->minimum_to_collect)" />
                             <x-input-error :messages="$errors->get('minimum_to_collect')" class="mt-2" />
@@ -205,6 +200,13 @@
                             <x-text-input id="payment_bank" class="block mt-1 w-full" type="text"
                                 name="payment_bank" :value="old('payment_bank', $debtor->payment_bank)" />
                             <x-input-error :messages="$errors->get('payment_bank')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="payment_bank_full_name" :value="__('Nombre del banco')" />
+                            <x-text-input id="payment_bank_full_name" class="block mt-1 w-full" type="text"
+                                name="payment_bank_full_name" :value="old('payment_bank_full_name', $debtor->payment_bank_full_name)" />
+                            <x-input-error :messages="$errors->get('payment_bank_full_name')" class="mt-2" />
                         </div>
 
                         <div>

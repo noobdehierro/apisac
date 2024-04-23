@@ -18,26 +18,26 @@
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 with-larasort">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Nombre
+                                    <th scope="col" class="px-6 py-3 text-indigo-400">
+                                        @sortableLink('full_name', 'Nombre')
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Estatus
+                                    <th scope="col" class="px-6 py-3 text-indigo-400">
+                                        @sortableLink('status', 'Estatus')
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Codigo acceso
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3">
-                                        Deuda total
+                                    <th scope="col" class="px-6 py-3 text-indigo-400">
+                                        @sortableLink('sce', 'Deuda total')
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Referencia pago
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Banco
+                                    <th scope="col" class="px-6 py-3 text-indigo-400">
+                                        @sortableLink('origin_bank', 'Banco de origen')
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Clave interbancaria
@@ -88,7 +88,7 @@
 
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $debtor->payment_bank }}
+                                                {{ $debtor->origin_bank }}
                                             </th>
 
                                             <th scope="row"
@@ -117,6 +117,10 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- {{ $debtors->links() }} --}}
+                    {!! $debtors->appends(\Request::except('page'))->render() !!}
+
+
                 </div>
             </div>
         </div>

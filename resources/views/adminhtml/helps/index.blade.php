@@ -20,25 +20,22 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        debtor_id
+                                        Cliente deudor
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        cel
+                                        Celular
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        telephone
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3">
-                                        email
+                                        Telefono
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        contacto cercano
+                                        Correo
                                     </th>
 
-
-
+                                    <th scope="col" class="px-6 py-3">
+                                        Contacto Cercano
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,6 +76,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $helps->links() }}
 
 
                 </div>

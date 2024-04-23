@@ -20,20 +20,20 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        debtor_id
+                                        Cliente deudor
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        cel
+                                        Celular
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        telephone
+                                        Telefono
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        email
+                                        Correo
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        ver
+                                        Ver
                                     </th>
                                 </tr>
                             </thead>
@@ -68,52 +68,10 @@
                                     @endforeach
                                 @endif
 
-                                {{-- @if ($maps->count() > 0)
-                                    @foreach ($maps as $map)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->debtor->full_name }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->help == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->clarification == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->imNot == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->interested == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->exhibition == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $map->Installments == 1 ? 'Entro' : 'No' }}
-                                            </th>
-
-                                        </tr>
-                                    @endforeach
-                                @endif --}}
-
-
                             </tbody>
                         </table>
                     </div>
+                    {{ $clarifications->links() }}
 
 
                 </div>

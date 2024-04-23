@@ -9,7 +9,7 @@ class MapsController extends Controller
 {
     public function index()
     {
-        $maps = Maps::paginate(10);
+        $maps = Maps::paginate(15);
 
         return view('adminhtml.maps.index', compact('maps'));
     }

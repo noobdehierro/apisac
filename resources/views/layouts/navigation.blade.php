@@ -57,6 +57,12 @@
                     </x-nav-link>
                 </div>
 
+                <div class="hidden  sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('recuperations.index')" :active="request()->routeIs('recuperations.index')">
+                        {{ __('Recuperaciones') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
 

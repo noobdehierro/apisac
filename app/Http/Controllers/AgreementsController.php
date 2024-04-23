@@ -13,7 +13,7 @@ class AgreementsController extends Controller
     public function index()
     {
 
-        $agreements = Agreements::paginate(10);
+        $agreements = Agreements::paginate(15);
         return view('adminhtml.agreements.index', compact('agreements'));
     }
 

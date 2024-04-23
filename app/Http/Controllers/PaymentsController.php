@@ -11,7 +11,12 @@ class PaymentsController extends Controller
     public function index()
     {
 
-        $payments = Payments::paginate(10);
+        $payments = Payments::select('debtor_id')
+            ->selectRaw('COUNT(id) AS total_payments')
+            ->selectRaw('SUM(paid_amount) AS total_paid_amount')
+            ->groupBy('debtor_id')
+            ->paginate(15);
+
         return view('adminhtml.payments.index', compact('payments'));
     }
 
@@ -24,8 +29,6 @@ class PaymentsController extends Controller
 
     public function store(Request $request)
     {
-
-
         $request->validate([
             'debtor_id' => 'required:exists:debtors,id',
             'payment_date' => 'required',
@@ -36,6 +39,17 @@ class PaymentsController extends Controller
         Payments::create($request->all());
 
         return redirect()->route('payments.index')->with('success', 'Client created successfully');
+    }
+
+    public function show($debtor)
+    {
+
+        // dd($debtor);
+
+        $payments = Payments::where('debtor_id', $debtor)->paginate(15);
+
+
+        return view('adminhtml.payments.show', compact('payments'));
     }
 
     public function edit(Payments $payments)

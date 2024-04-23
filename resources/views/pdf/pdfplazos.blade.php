@@ -78,7 +78,7 @@
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
                 PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
-                EMITIDO POR {{ $payment_bank }} INSTITUCIÓN DE BANCA MÚLTIPLE, GRUPO FINANCIERO BBVA BANCOMER Y POR LA
+                EMITIDO POR {{ $portfolio }} Y POR LA
                 OTRA
                 PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR DE LAS
                 SIGUIENTES CLÁUSULAS:
@@ -91,7 +91,7 @@
                 CANTIDAD DE
                 ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
                 CRÉDITO NO.
-                {{ $credit_number }} EMITIDO POR {{ $payment_bank }} S.A., INSTITUCIÓN DE BANCA MÚLTIPLE.
+                {{ $credit_number }} EMITIDO POR {{ $portfolio }}.
             </P>
 
             <h3>CLAUSULA SEGUNDA</h3>
@@ -174,9 +174,11 @@
         <br>
         <div>
             <h3>CLAUSULA CUARTA</h3>
-            <p class="parrafo">EL TITULAR DEBERÁ REPORTAR AL ACREEDOR, EL PAGO A LOS TELEFONOS ########## o ########## Y
+            <p class="parrafo">EL TITULAR DEBERÁ REPORTAR AL ACREEDOR, EL PAGO AL TELEFONO 55-6270-0471 O NUESTRO
+                WHATSAPP 56-3188-5034 Y
                 ENVIAR POR VÍA
-                CORREO ELECTRÓNICO A LA SIGUIENTE DIRECCIÓN cobranza@ibkan.com.mx EL COMPROBANTE DE PAGO CORRESPONDIENTE
+                CORREO ELECTRÓNICO A LA SIGUIENTE DIRECCIÓN atencioncc@ibkan.com.mx EL COMPROBANTE DE PAGO
+                CORRESPONDIENTE
                 CON FINES DE CONSTATAR LA VERACIDAD DEL DEPÓSITO.</p>
 
             <h3>CLAUSULA QUINTA</h3>
@@ -209,28 +211,28 @@
                 RECLAMAR EL TOTAL DE LA DEUDA.</p>
 
             <p>ENTERADAS LAS PARTES DEL CONTENIDO Y ALCANCE LEGAL DEL PRESENTE CONVENIO, DE ACUERDO CON LO ESTABLECIDO
-                EN EL MISMO Y FIRMADO AL CALCE Y AL MARGEN POR AMBAS PARTES PARA SU LEGITIMACIÓN EL DÍA 17 DE DICIEMBRE
-                DEL 2021 EN LA CIUDAD DE MÉXICO.</p>
-
+                EN EL MISMO AMBAS PARTES ESTAN DE ACUERDO PARA SU LEGITIMACIÓN EL DÍA {{ $dia }} DE
+                {{ $mes }}
+                DEL {{ $ano }} EN LA CIUDAD DE MÉXICO.</p>
         </div>
 
 
 
-        <div class="left-column">
+        <div style="text-align: center">
             <h1>PATRICIA RAMOS C.</h1>
             <h2>AREA ADMINISTRATIVA</h2>
             <p>IBKAN CAPITAL S.A.P.I. DE C.V.</p>
 
         </div>
-
-        <div class="right-column">
-            <p>****** ******** *******</p>
+        <hr style="width: 50%; margin: 0 auto">
+        <div style="text-align: center">
+            <p>{{ $name }}</p>
 
             <h2>TITULAR</h2>
         </div>
 
 
-
+    </div>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ class HelpController extends Controller
 {
     public function index()
     {
-        $helps = Help::paginate(10);
+        $helps = Help::paginate(15);
 
         return view('adminhtml.helps.index', compact('helps'));
     }
