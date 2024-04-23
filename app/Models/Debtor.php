@@ -51,4 +51,9 @@ class Debtor extends Model
         'phone_1',
         'phone_2',
     ];
+
+    public function statusNotification()
+    {
+        return $this->belongsTo(Status_notification::class, 'status_id');
+    }
 }

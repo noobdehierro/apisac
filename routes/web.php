@@ -11,6 +11,7 @@ use App\Http\Controllers\MapsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecuperationController;
+use App\Http\Controllers\StatusNotificationController;
 use App\Http\Controllers\UnknownsController;
 use App\Models\Clarification;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/recuperations/{recuperation}/edit', [RecuperationController::class, 'edit'])->name('recuperations.edit');
     Route::put('/recuperations/{recuperation}', [RecuperationController::class, 'update'])->name('recuperations.update');
     Route::delete('/recuperations/{recuperation}', [RecuperationController::class, 'destroy'])->name('recuperations.destroy');
+
+    Route::get('/statusNotifications', [StatusNotificationController::class,'index'])->name('statusNotifications.index');
+    Route::get('/statusNotifications/create', [StatusNotificationController::class,'create'])->name('statusNotifications.create');
+    Route::post('/statusNotifications', [StatusNotificationController::class,'store'])->name('statusNotifications.store');
 });
 
 require __DIR__ . '/auth.php';
