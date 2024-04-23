@@ -14,7 +14,7 @@ class DebtorController extends Controller
      */
     public function index()
     {
-        $debtors = Debtor::paginate(15);
+        $debtors = Debtor::autosort()->paginate(15);
         return view('adminhtml.debtors.index', compact('debtors'));
     }
 

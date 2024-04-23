@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgreementsController;
 use App\Http\Controllers\ClarificationController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtorController;
 use App\Http\Controllers\DebtsController;
 use App\Http\Controllers\HelpController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\MapsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecuperationController;
+use App\Http\Controllers\StatusNotificationController;
 use App\Http\Controllers\UnknownsController;
 use App\Models\Clarification;
 use Illuminate\Support\Facades\Route;
@@ -25,36 +27,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('adminhtml.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/', function () {
+//     return view('adminhtml.dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('adminhtml.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('adminhtml.dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/clients', [ClientsController::class, 'index'])->name('clients.index');
-    Route::get('/clients/Create', [ClientsController::class, 'create'])->name('clients.create');
-    Route::post('/clients', [ClientsController::class, 'store'])->name('clients.store');
-    Route::get('/clients/{client}/Edit', [ClientsController::class, 'edit'])->name('clients.edit');
-    Route::put('/clients/{client}', [ClientsController::class, 'update'])->name('clients.update');
-    Route::delete('/clients/{client}', [ClientsController::class, 'destroy'])->name('clients.destroy');
-
-    Route::get('/debts', [DebtsController::class, 'index'])->name('debts.index');
-    Route::get('/debts/Create', [DebtsController::class, 'create'])->name('debts.create');
-    Route::post('/debts', [DebtsController::class, 'store'])->name('debts.store');
-    Route::get('/debts/{debts}/Edit', [DebtsController::class, 'edit'])->name('debts.edit');
-    Route::put('/debts/{debts}', [DebtsController::class, 'update'])->name('debts.update');
-    Route::delete('/debts/{debts}', [DebtsController::class, 'destroy'])->name('debts.destroy');
-
     Route::get('/payments', [PaymentsController::class, 'index'])->name('payments.index');
     Route::get('/payments/Create', [PaymentsController::class, 'create'])->name('payments.create');
     Route::post('/payments', [PaymentsController::class, 'store'])->name('payments.store');
+    Route::get('/payments/{debtor}', [PaymentsController::class, 'show'])->name('payments.show');
     Route::get('/payments/{payments}/Edit', [PaymentsController::class, 'edit'])->name('payments.edit');
     Route::put('/payments/{payments}', [PaymentsController::class, 'update'])->name('payments.update');
     Route::delete('/payments/{payments}', [PaymentsController::class, 'destroy'])->name('payments.destroy');
@@ -87,6 +81,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/recuperations/{recuperation}/edit', [RecuperationController::class, 'edit'])->name('recuperations.edit');
     Route::put('/recuperations/{recuperation}', [RecuperationController::class, 'update'])->name('recuperations.update');
     Route::delete('/recuperations/{recuperation}', [RecuperationController::class, 'destroy'])->name('recuperations.destroy');
+
+    Route::get('/statusNotifications', [StatusNotificationController::class, 'index'])->name('statusNotifications.index');
+    Route::get('/statusNotifications/create', [StatusNotificationController::class, 'create'])->name('statusNotifications.create');
+    Route::post('/statusNotifications', [StatusNotificationController::class, 'store'])->name('statusNotifications.store');
+
+    Route::get('/statusNotifications/{statusNotification}/single_message', [StatusNotificationController::class, 'single_message'])->name('statusNotifications.single_message');
+    Route::get('/statusNotifications/bulk_messages', [StatusNotificationController::class, 'bulk_messages'])->name('statusNotifications.bulk_messages');
 });
 
 require __DIR__ . '/auth.php';

@@ -16,7 +16,7 @@
 
     - Correo Electrónico: [atencioncc@adygcmex.mx](mailto:atencioncc@adygcmex.mx)
     - Teléfono: [55 6270 0471](tel:5562700471)
-    - WhatsApp: [56 3188 5034](https://wa.me/5631885034)
+    - WhatsApp: [56 3213 7142](https://wa.me/5632137142)
 
     Agradecemos tu confianza.
 
