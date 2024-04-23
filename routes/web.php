@@ -82,9 +82,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/recuperations/{recuperation}', [RecuperationController::class, 'update'])->name('recuperations.update');
     Route::delete('/recuperations/{recuperation}', [RecuperationController::class, 'destroy'])->name('recuperations.destroy');
 
-    Route::get('/statusNotifications', [StatusNotificationController::class,'index'])->name('statusNotifications.index');
-    Route::get('/statusNotifications/create', [StatusNotificationController::class,'create'])->name('statusNotifications.create');
-    Route::post('/statusNotifications', [StatusNotificationController::class,'store'])->name('statusNotifications.store');
+    Route::get('/statusNotifications', [StatusNotificationController::class, 'index'])->name('statusNotifications.index');
+    Route::get('/statusNotifications/create', [StatusNotificationController::class, 'create'])->name('statusNotifications.create');
+    Route::post('/statusNotifications', [StatusNotificationController::class, 'store'])->name('statusNotifications.store');
+
+    Route::get('/statusNotifications/{statusNotification}/single_message', [StatusNotificationController::class, 'single_message'])->name('statusNotifications.single_message');
+    Route::get('/statusNotifications/bulk_messages', [StatusNotificationController::class, 'bulk_messages'])->name('statusNotifications.bulk_messages');
 });
 
 require __DIR__ . '/auth.php';

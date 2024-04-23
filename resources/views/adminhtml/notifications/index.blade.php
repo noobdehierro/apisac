@@ -4,9 +4,14 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Notificaciones') }}
             </h2>
-            <a href="{{ route('statusNotifications.create') }}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                Agregar notificaciónes
-            </a>
+            <div class="flex gap-2">
+                <a href="{{ route('statusNotifications.create') }}"
+                    class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                    Agregar notificaciónes
+                </a>
+                <a href="{{ route('statusNotifications.bulk_messages') }}"
+                    class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Mensajes masivos</a>
+            </div>
         </div>
     </x-slot>
 
@@ -20,13 +25,11 @@
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 with-larasort">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
-                                        Nombre                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-indigo-400">
+                                    <th scope="col" class="px-6 py-3">
+                                        Nombre </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Estatus Notificación
                                     </th>
-                                    
-
                                     <th scope="col" class="px-6 py-3">
                                         Acciones
                                     </th>
@@ -45,11 +48,12 @@
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $debtor->statusNotification->name }}
-                                            </th>                                        
+                                            </th>
 
                                             <td class="px-6 py-4">
-                                                {{-- <a href="{{ route('statusNotifications.edit', $debtor->id) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a> --}}
+                                                <a href="{{ route('statusNotifications.single_message', $debtor->id) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Enviar
+                                                    notificación</a>
                                             </td>
 
                                         </tr>

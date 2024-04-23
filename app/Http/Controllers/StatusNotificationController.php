@@ -22,7 +22,6 @@ class StatusNotificationController extends Controller
         $debtorNotifications = Debtor::where("status_id", 1)->paginate(10);
 
         return view('adminhtml.notifications.index', compact('debtorNotifications'));
-
     }
 
     /**
@@ -61,11 +60,10 @@ class StatusNotificationController extends Controller
             if ($search) {
                 $search->status_id = 1;
                 $search->save();
-            } 
-
+            }
         }
 
-        return redirect()->route('statusNotifications.index')->with('success','Notification sent successfully');
+        return redirect()->route('statusNotifications.index')->with('success', 'Notification sent successfully');
     }
 
     /**
@@ -111,5 +109,18 @@ class StatusNotificationController extends Controller
     public function destroy(Status_notification $status_notification)
     {
         //
+    }
+
+    public function single_message($id)
+    {
+        dd($id);
+    }
+
+    public function bulk_messages()
+    {
+
+        $debtorNotifications = Debtor::where("status_id", 1)->get();
+
+        dd($debtorNotifications);
     }
 }
