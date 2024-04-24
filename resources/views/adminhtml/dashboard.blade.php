@@ -22,7 +22,7 @@
 
                                 </div>
 
-                                <a href="/debtors" class="text-[#f84525] font-medium text-sm hover:text-red-800">Ver
+                                <a href="/debtors" class="text-indigo-400 font-medium text-sm hover:text-indigo-800">Ver
                                     más</a>
                             </div>
                             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
@@ -38,7 +38,8 @@
                                     </div>
 
                                 </div>
-                                <a href="/agreements" class="text-[#f84525] font-medium text-sm hover:text-red-800">Ver
+                                <a href="/agreements"
+                                    class="text-indigo-400 font-medium text-sm hover:text-indigo-800">Ver
                                     más</a>
                             </div>
                             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
@@ -54,7 +55,8 @@
 
                                 </div>
                                 <a href="/agreements"
-                                    class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+                                    class="text-indigo-400 font-medium text-sm hover:text-indigo-800">Ver
+                                    más</a>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -162,9 +164,9 @@
                                                             <span class="mr-2">60%</span>
                                                             <div class="relative w-full">
                                                                 <div
-                                                                    class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                                                                    class="overflow-hidden h-2 text-xs flex rounded bg-indigo-200">
                                                                     <div style="width: 60%"
-                                                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500">
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -55,9 +55,9 @@ class ClientsController extends Controller
 
         $debtorsActivo = Debtor::where('id', $debtors->id)->first();
 
-        $full_name = $debtorsActivo->full_name;
-        $nombre_completo = explode(" ", $full_name);
-        $debtorsActivo->full_name = $nombre_completo[0];
+        // $full_name = $debtorsActivo->full_name;
+        // $nombre_completo = explode(" ", $full_name);
+        // $debtorsActivo->full_name = $nombre_completo[0];
 
         $paymentsActive = Payments::where('debtor_id', $debtorsActivo->id)->get();
 
