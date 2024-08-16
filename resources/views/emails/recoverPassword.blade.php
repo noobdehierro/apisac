@@ -1,26 +1,26 @@
 @component('mail::message')
-    # Recuperación de Código de Acceso
+# Recuperación de Código de Acceso
 
-    Estimado/a **{{ $debtor->full_name }}**,
+Estimado/a **{{ $debtor->full_name }}**,
 
-    Es un placer ayudarte con la recuperación de tu código de acceso. A continuación, encontrarás tu nuevo código de acceso:
-
-
-    **<center>{{ $debtor->access_code }}</center>**
+Es un placer ayudarte con la recuperación de tu código de acceso. A continuación, encontrarás tu nuevo código de acceso:
 
 
-    Te sugerimos guardar este correo electrónico en un lugar seguro.
+**<center>{{ $debtor->access_code }}</center>**
 
-    Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con
-    nosotros de inmediato a través de los siguientes medios:
 
-    - Correo Electrónico: [atencioncc@adygcmex.mx](mailto:atencioncc@adygcmex.mx)
-    - Teléfono: [55 6270 0471](tel:5562700471)
-    - WhatsApp: [56 3213 7142](https://wa.me/5632137142)
+Te sugerimos guardar este correo electrónico en un lugar seguro.
 
-    Agradecemos tu confianza.
+Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con
+nosotros de inmediato a través de los siguientes medios:
 
-    <center>Atentamente</center>
+- Correo Electrónico: [atencion@trantus.com](mailto:atencion@trantus.com)
+- Teléfono: [55 9657 7258](tel:5596577258)
+- WhatsApp: [56 3199 0006](https://wa.me/5215631990006)
 
-    **<center>Soluciones Administrativas</center>**
+Agradecemos tu confianza.
+
+<center>Atentamente</center>
+
+**<center>Soluciones Administrativas</center>**
 @endcomponent
