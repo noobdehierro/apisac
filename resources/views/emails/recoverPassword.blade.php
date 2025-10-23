@@ -13,13 +13,13 @@ Te sugerimos guardar este correo electrónico en un lugar seguro.
 
 Si no has solicitado este cambio de código de acceso o tienes alguna pregunta, no dudes en ponerte en contacto con nosotros de inmediato a través de los siguientes medios:
 
-- Correo Electrónico: [atencioncc@ibkan.com.mx](mailto:atencioncc@ibkan.com.mx)
-- Teléfono: [55 6270 0471](tel:5562700471)
-- WhatsApp: [56 3188 5034](https://wa.me/5631885034)
+- Correo Electrónico: [arreglatudeuda@trantus.mx](mailto:arreglatudeuda@trantus.mx)
+- Teléfono: [55 9874 9910](tel:5598749910)
+- WhatsApp: [56 4930 8736](https://wa.me/5649308736)
 
 Agradecemos tu confianza.
 
 <center>Atentamente</center>
 
-**<center>IBKAN Capital</center>**
+**<center>ADYGCMEX</center>**
 @endcomponent

@@ -77,7 +77,7 @@
         <div>
             <p class="parrafo">CONSTE POR EL PRESENTE DOCUMENTO, LAS CONDICIONES GENERALES Y RECONOCIMIENTO DE ADEUDO Y
                 OFRECIMIENTO DE
-                PAGO, QUE CELEBRAN POR UNA PARTE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”), COMO ACREEDOR DEL CRÉDITO
+                PAGO, QUE CELEBRAN POR UNA PARTE ADYGCMEX, S.A.P.I. DE C.V., (“ADYGCMEX”), COMO ACREEDOR DEL CRÉDITO
                 EMITIDO POR {{ $portfolio }} Y POR LA
                 OTRA
                 PARTE EL C. {{ $name }} COMO LA PARTE TITULAR DEL CRÉDITO. AL TENOR
@@ -87,8 +87,8 @@
             <h2>CLAUSULAS</h2>
             <H3>CLAUSULA PRIMERA</H3>
 
-            <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> IBKAN CAPITAL, S.A.P.I. DE
-                C.V., (“IBKAN”), <span class="red">POR</span> LA
+            <P class="parrafo">EL TITULAR <span class="red">RECONOCE LA DEUDA CON</span> ADYGCMEX, S.A.P.I. DE
+                C.V., (“ADYGCMEX”), <span class="red">POR</span> LA
                 CANTIDAD DE
                 ${{ $sce }} {{ $minimum_to_collect }} CANTIDAD DERIVADA DEL
                 CRÉDITO NO.
@@ -117,7 +117,7 @@
                     <td style="background-color: #d0d8e7; color: black; font-size: 12px">
                         ${{ $deuda }}{{ $deudaLetter }}</td>
                     <td style="background-color: #d0d8e7; color: black; font-size: 12px">{{ $date }}</td>
-                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">A CAPITAL</td>
+                    <td style="background-color: #d0d8e7; color: black; font-size: 12px">A MEX</td>
                 </tr>
             </table>
         </div>
@@ -127,8 +127,8 @@
 
             <h3>CLAUSULA TERCERA</h3>
 
-            <p class="parrafo">LOS PAGOS DEBERÁN REALIZARSE A LA CUENTA CONCENTRADORA DE IBKAN CAPITAL, S.A.P.I. DE
-                C.V., (“IBKAN”)
+            <p class="parrafo">LOS PAGOS DEBERÁN REALIZARSE A LA CUENTA CONCENTRADORA DE ADYGCMEX, S.A.P.I. DE
+                C.V., (“ADYGCMEX”)
                 CUYOS DATOS BANCARIOS SON LOS SIGUIENTES:
             </p>
             <p class="parrafo">PAGO EN VENTANILLA/PRACTICAJA</p>
@@ -166,10 +166,10 @@
         <br>
         <div>
             <h3>CLAUSULA CUARTA</h3>
-            <p class="parrafo">EL TITULAR DEBERÁ REPORTAR AL ACREEDOR, EL PAGO AL TELEFONO 55-6270-0471 O NUESTRO
-                WHATSAPP 56-3188-5034 Y
+            <p class="parrafo">EL TITULAR DEBERÁ REPORTAR AL ACREEDOR, EL PAGO AL TELEFONO 55-9874-9910 O NUESTRO
+                WHATSAPP 56-4930-8736 Y
                 ENVIAR POR VÍA
-                CORREO ELECTRÓNICO A LA SIGUIENTE DIRECCIÓN atencioncc@ibkan.com.mx EL COMPROBANTE DE PAGO
+                CORREO ELECTRÓNICO A LA SIGUIENTE DIRECCIÓN arreglatudeuda@trantus.mx EL COMPROBANTE DE PAGO
                 CORRESPONDIENTE
                 CON FINES DE CONSTATAR LA VERACIDAD DEL DEPÓSITO.</p>
 
@@ -177,7 +177,7 @@
 
             <p class="parrafo">UNA VEZ QUE EL TITULAR REALICE EL PAGO TOTAL DE LA DEUDA ESPECIFICADA EN LA SEGUNDA
                 CLAUSULA DEL
-                PRESENTE, IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) SE COMPROMETE A ENTREGAR LA CARTA FINIQUITO
+                PRESENTE, ADYGCMEX, S.A.P.I. DE C.V., (“ADYGCMEX”) SE COMPROMETE A ENTREGAR LA CARTA FINIQUITO
                 CORRESPONDIENTE A LA LIQUIDACIÓN DEL CRÉDITO ANTES MENCIONADO EN UN PERIODO NO MAYOR A 30 DÍAS HÁBILES A
                 PARTIR DE LA CONFIRMACIÓN DE LIQUIDACIÓN Y APLICACIÓN DE PAGO.</p>
 
@@ -185,12 +185,12 @@
 
             <p class="parrafo">SE REALIZARÁ ACTUALIZACIÓN DE LA INFORMACIÓN CREDITICIA ANTE BURO NACIONAL DE CRÉDITO, EN
                 EL REGISTRO
-                CORRESPONDIENTE A IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) CON LA CLAVE DE OBSERVACIÓN MOP01 QUE
+                CORRESPONDIENTE A ADYGCMEX, S.A.P.I. DE C.V., (“ADYGCMEX”) CON LA CLAVE DE OBSERVACIÓN MOP01 QUE
                 SIGNIFICA PAGO PUNTUAL Y ADECUADO.</p>
 
             <h3>CLAUSULA SEPTIMA</h3>
 
-            <p class="parrafo">UNA VEZ QUE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) SE DÉ POR INFORMADO SOBRE EL PAGO
+            <p class="parrafo">UNA VEZ QUE ADYGCMEX, S.A.P.I. DE C.V., (“ADYGCMEX”) SE DÉ POR INFORMADO SOBRE EL PAGO
                 TOTAL DEL
                 PRESENTE CONVENIO, EN CASO DE QUE LAS PARTES ANTES MENCIONADAS LLEVEN EL TRAMITE DE LIQUIDACIÓN MEDIANTE
                 UN JUZGADO COMPETENTE, GIRARÁ INSTRUCCIÓN AL ÁREA JURÍDICA</p>
@@ -199,7 +199,7 @@
 
             <p>ANTE EL INCUMPLIMIENTO Y FALTA DE REPORTE DEL PAGO PARA LA LIQUIDACIÓN DEL CRÉDITO OFRECIDO POR PARTE DEL
                 TITULAR, SE ENTENDERÁ RESCINDIDO EL PRESENTE CONVENIO, SUJETÁNDOSE A LA JURISDICCIÓN DE LOS JUZGADOS
-                CIVILES COMPETENTES, DEJANDO A SALVO LOS DERECHOS DE IBKAN CAPITAL, S.A.P.I. DE C.V., (“IBKAN”) A
+                CIVILES COMPETENTES, DEJANDO A SALVO LOS DERECHOS DE ADYGCMEX, S.A.P.I. DE C.V., (“ADYGCMEX”) A
                 RECLAMAR EL TOTAL DE LA DEUDA.</p>
 
             <p>ENTERADAS LAS PARTES DEL CONTENIDO Y ALCANCE LEGAL DEL PRESENTE CONVENIO, DE ACUERDO CON LO ESTABLECIDO
@@ -214,7 +214,7 @@
         <div style="text-align: center">
             <h1>PATRICIA RAMOS C.</h1>
             <h2>AREA ADMINISTRATIVA</h2>
-            <p>IBKAN CAPITAL S.A.P.I. DE C.V.</p>
+            <p>ADYGCMEX S.A.P.I. DE C.V.</p>
 
         </div>
         <hr style="width: 50%; margin: 0 auto">
