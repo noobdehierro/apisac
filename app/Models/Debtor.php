@@ -50,6 +50,13 @@ class Debtor extends Model
         'portfolio',
         'phone_1',
         'phone_2',
+        'nvo_rfc',
+        'marca',
+        'modelo',
+        'vehicle_year',
+        'vin',
+        'origin_bank',
+        'status_id'
     ];
 
     public function statusNotification()
@@ -57,3 +64,8 @@ class Debtor extends Model
         return $this->belongsTo(Status_notification::class, 'status_id');
     }
 }
+// $table->string('nvo_rfc')->nullable();
+//             $table->string('marca')->nullable();
+//             $table->string('modelo')->nullable();
+//             $table->string('vehicle_year')->nullable();
+//             $table->string('vin')->nullable();

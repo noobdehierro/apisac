@@ -360,6 +360,11 @@ class ClientsController extends Controller
         $payment_reference = $debtor->payment_reference;
         $agreement = $debtor->agreement;
         $interbank_key = $debtor->interbank_key;
+        $nvo_rfc = $debtor->nvo_rfc;
+        $marca = $debtor->marca;
+        $modelo = $debtor->modelo;
+        $vehicle_year = $debtor->vehicle_year;
+        $vin = $debtor->vin;
 
         // dd($sce, $minimum_to_collect,$deudaConDescuento, $portfolio, $deudaLetter, $credit_number, $payment_bank, $payment_reference, $agreement, $interbank_key);
 
@@ -379,7 +384,12 @@ class ClientsController extends Controller
             'payment_bank_full_name' => $payment_bank_full_name,
             'payment_reference' => $payment_reference,
             'agreement' => $agreement,
-            'interbank_key' => $interbank_key
+            'interbank_key' => $interbank_key,
+            'nvo_rfc' => $nvo_rfc,
+            'marca' => $marca,
+            'modelo' => $modelo,
+            'vehicle_year' => $vehicle_year,
+            'vin' => $vin
 
         ]);
 
@@ -509,6 +519,11 @@ class ClientsController extends Controller
         $payment_reference = $debtor->payment_reference;
         $agreement = $debtor->agreement;
         $remainingDebt = $debtor->remainingDebt;
+        $nvo_rfc = $debtor->nvo_rfc;
+        $marca = $debtor->marca;
+        $modelo = $debtor->modelo;
+        $vehicle_year = $debtor->vehicle_year;
+        $vin = $debtor->vin;
 
         $primeraCuota = $debtor->one_three_months;
         $segundaCuota = $debtor->four_six_months;
@@ -567,7 +582,12 @@ class ClientsController extends Controller
             'agreement' => $agreement,
             'deudaConPlazos' => number_format($deudaConPlazos, 2, '.', ','),
             'deudaConPlazosLetter' => $deudaConPlazosLetter,
-            'interbank_key' => $debtor->interbank_key
+            'interbank_key' => $debtor->interbank_key,
+            'nvo_rfc' => $nvo_rfc,
+            'marca' => $marca,
+            'modelo' => $modelo,
+            'vehicle_year' => $vehicle_year,
+            'vin' => $vin
         ]);
 
         return $pdf->download('contract_' . $debtor->full_name . '_' . $fecha->format('Y-m-d') . '.pdf');
