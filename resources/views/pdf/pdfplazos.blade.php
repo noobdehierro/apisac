@@ -231,9 +231,6 @@
                     <td>
                         {{ $payment->payment_date }}
                     </td>
-                    <td>
-                        A MEX</td>
-
                 </tr>
                 @endforeach
             </tbody>
