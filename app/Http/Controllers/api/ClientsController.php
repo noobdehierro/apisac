@@ -77,7 +77,7 @@ class ClientsController extends Controller
             'debtor_id' => 'required',
             'cel' => 'nullable',
             'telephone' => 'nullable',
-            'email' => ['nullable', 'email'],
+            'email' => 'nullable|email',
             'telephoneContact' => 'nullable',
         ]);
 
