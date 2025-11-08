@@ -238,14 +238,14 @@
 
         <p>
             Opción 1: Pago en sucursal Bancaria o practicaja<br />
-            Banco: <span class="bold">{{ $payment_bank }}</span><br />
-            Cuenta: <span class="bold">{{ $agreement }}</span><br />
+            Banco: <span class="bold">Banorte</span><br />
+            Cuenta: <span class="bold">1332202373</span><br />
             Referencia: <span class="bold">{{ $payment_reference }}</span>
         </p>
 
         <p>
             Opción 2: Transferencia<br />
-            Clabe: <span class="bold">{{ $interbank_key }}</span><br />
+            Clabe: <span class="bold">072180013322023736</span><br />
             Referencia: <span class="bold">{{ $payment_reference }}</span>
         </p>
 
